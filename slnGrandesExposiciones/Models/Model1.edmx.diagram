@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9ae7e6107216436bbda7bd516e53b2a3" Name="Diagram1">
+        <EntityTypeShape EntityType="GrandesExposicionesModel.Archivos_Exposiciones" Width="1.5" PointX="3" PointY="6" />
+        <EntityTypeShape EntityType="GrandesExposicionesModel.Campos" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="GrandesExposicionesModel.Exposiciones" Width="1.5" PointX="3" PointY="2.875" />
+        <EntityTypeShape EntityType="GrandesExposicionesModel.Formulas" Width="1.5" PointX="1.5" PointY="16.125" />
+        <EntityTypeShape EntityType="GrandesExposicionesModel.Parametros_Exposiciones" Width="1.5" PointX="3" PointY="12" />
+        <EntityTypeShape EntityType="GrandesExposicionesModel.Periodos" Width="1.5" PointX="0.75" PointY="6.125" />
+        <EntityTypeShape EntityType="GrandesExposicionesModel.Tablas" Width="1.5" PointX="1.5" PointY="18.625" />
+        <EntityTypeShape EntityType="GrandesExposicionesModel.Valor_Campos" Width="1.5" PointX="3" PointY="9.125" />
+        <AssociationConnector Association="GrandesExposicionesModel.FK__Archivos___ID_PE__62458BBE" />
+        <AssociationConnector Association="GrandesExposicionesModel.FK__Campos__ID_FORMU__6CC31A31" />
+        <AssociationConnector Association="GrandesExposicionesModel.FK__Campos__ID_TABLA__6BCEF5F8" />
+        <AssociationConnector Association="GrandesExposicionesModel.FK__Valor_Cam__ID_CA__01BE3717" />
+        <AssociationConnector Association="GrandesExposicionesModel.FK__Exposicio__ID_PE__737017C0" />
+        <AssociationConnector Association="GrandesExposicionesModel.FK__Parametro__ID_PE__5F691F13" />
+        <AssociationConnector Association="GrandesExposicionesModel.FK__Valor_Cam__ID_PE__02B25B50" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

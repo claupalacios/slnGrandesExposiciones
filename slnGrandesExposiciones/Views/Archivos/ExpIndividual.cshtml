@@ -1,0 +1,69 @@
+﻿@model IList<slnGrandesExposiciones.Dtos.TablaValoresDto>
+
+
+@using NonFactors.Mvc.Grid;
+@{
+    ViewBag.Title = "Inicio";
+}
+
+<head>
+    <link href="~/Content/MvcGrid/mvc-grid.css" rel="stylesheet">
+    <script src="~/Scripts/MvcGrid/mvc-grid.js"></script>
+    <script src="~/Scripts/Home/index.js"></script>
+
+
+    @Styles.Render("~/Content/bootstrap.css")
+    @Styles.Render("~/Content/Global.css")
+    @Styles.Render("~/Content/Archivos.css")
+    @Styles.Render("~/Content/Home.css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+</head>
+
+
+<section class="content-inner">
+
+    <div class="container-buttons row">
+        <span class="col-1"></span>
+        <button id="botonIngresar" type="button" class="orange-button col-2 btn btn-outline-secondary activo" data-toggle="modal" data-target="#modalIngresar">Total Por Grupo</button>
+        <span class="col-1"></span>
+        <button id="botonConfiguracionTir" type="button" class="orange-button col-2 btn btn-outline-secondary">Exposiciones Individual</button>
+        <span class="col-1"></span>
+        <button id="botonConfiguracionTir" type="button" class="orange-button col-2 btn btn-outline-secondary">Grupo Individual</button>
+        <span class="col-1"></span>
+
+    </div>
+    <br /><br />
+
+    @Html.AjaxGrid(Url.Action("IndexGrid"))
+    <div class="content-table">
+        @(Html
+                                            .Grid(Model)
+                                            .Build(columns =>
+                                            {                                       
+                                                foreach (var item in Model)
+                                                {
+                                                    columns.Add(modelItem => item.Valor).Titled(item.Titulo);
+                                                }
+                                            })
+                                            .Empty("No se encontraron datos")
+                                            .Id("my-ajax-grid")
+                                            .Filterable()
+                                            .Sortable()
+        )
+    </div>
+
+</section>
+
+
+<script>
+
+    $('.container-buttons button').on('click', function () {
+        if (!$(this).is('activo')) {
+            $('.activo').toggleClass('activo');
+            $(this).toggleClass('activo');
+        }
+    });
+
+</script>

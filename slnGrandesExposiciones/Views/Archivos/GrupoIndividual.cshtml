@@ -1,0 +1,39 @@
+﻿@model IEnumerable<slnGrandesExposiciones.Models.Valor_Campos>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.VALOR)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Campos.CAMPO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Periodos.PERIODO)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.VALOR)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Campos.CAMPO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Periodos.PERIODO)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

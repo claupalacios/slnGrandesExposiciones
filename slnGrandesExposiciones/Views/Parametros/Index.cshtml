@@ -1,0 +1,116 @@
+﻿@model IEnumerable<slnGrandesExposiciones.Models.Parametros_Exposiciones>
+
+@{
+    ViewBag.Title = "Modificación de Parámetros";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link href="~/Content/MvcGrid/mvc-grid.css" rel="stylesheet">
+    <script src="~/Scripts/MvcGrid/mvc-grid.js"></script>
+
+
+    @Styles.Render("~/Content/bootstrap.css")
+    @Styles.Render("~/Content/Global.css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+</head>
+<section class="content-principal">
+    <h2>Detalle de Deudores</h2>
+
+    @*<img id="imgBarra" src="~/Content/Images/footer-orange-line.png" />*@
+    <br /><br />
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Periodos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TIER_1)
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TIER_2)
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TIER_3)
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SMVM)
+
+            </th>
+            <th>
+                <span>MODIFICAR</span>
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID_PERIODO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TIER_1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TIER_2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TIER_3)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SMVM)
+                </td>
+                <td>
+                    <button id="botonModificar" data-id="@item.ID" type="button" class="orange-button btn btn-outline-secondary" data-toggle="modal" data-target="#modalModificar"><i class="fa fa-cog"></i></button>
+                </td>
+            </tr>
+        }
+
+
+    </table>
+</section>
+
+    <!--MODAL MODIFICAR-->
+    <div class="modal fade " id="modalModificar" tabindex="-1" role="dialog" aria-labelledby="modalModificarLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalModificarLabel">Modificar Parámetro</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        @*@Html.LabelFor(item => item.., new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.LastName)
+                                @Html.ValidationMessageFor(model => model.LastName)*@
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-outline-secondary confirm-button">Aceptar</button>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script>
+
+        $(document).on("click", "#botonModificar", function () {
+            var myBookId = $(this).data('id');
+            alert(myBookId);
+            // As pointed out in comments,
+            // it is unnecessary to have to manually call the modal.
+            // $('#addBookDialog').modal('show');
+        });
+
+    </script>
+    <!--FIN MODAL MODIFICAR-->

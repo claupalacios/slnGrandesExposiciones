@@ -1,0 +1,37 @@
+﻿.form-horizontal>div>div>input {
+    font-size: 12px;
+    height: 24px;
+}
+
+.form-horizontal>div>label {
+    font-size: 12px;
+}
+
+.form-horizontal> .grupo-div .form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
+    margin-left: 0px;
+    margin-right: 4px;
+}
+
+.grupo-div {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 4px;
+    border-color: #f3f3f3;
+    padding: 8px 8px 0px 8px;
+}
+
+.grupo-div label {
+    font-size: 12px;
+}
+
+.grupo-div input {
+    height: 24px;
+    font-size: 12px;
+}
+
+textarea {
+    font-size: 12px;
+}

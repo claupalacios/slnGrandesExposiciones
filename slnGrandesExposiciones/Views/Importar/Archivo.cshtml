@@ -1,0 +1,117 @@
+﻿@model slnGrandesExposiciones.Models.Exposiciones
+
+@{
+    ViewBag.Title = "Importar Deudores";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="color:#FF6600; font-family:'Agilita Com'; text-align: center;">Regimen Informativo - Grandes Exposiciones</h2>
+<h3 style="color:#FF6600; font-family:'Agilita Com'; text-align: center;">Importar Deudores</h3>
+
+<img id="imgBarra" src="~/Content/Images/footer-orange-line.png" />
+<br /><br />
+
+
+@using (Html.BeginForm("Archivo", "Importar", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+@*<form action="ImportarFin" enctype="multipart/form-data" method="post">*@
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <div class="form-horizontal" style="margin-bottom: 8px; min-width: 800px;">
+            <div class="form-group col-md-12 col-xs-12" style="border-radius: 5px; border: 1px solid lightgray; border-image: none; width: 800px; height: 100%; left: 140px; padding-top: 32px; padding-bottom: 32px; padding-left: 48px; background-color: RGBA(211, 211, 211, 0.4);">
+                <div class="form-group col-md-12 col-xs-12" style="margin-bottom: 0px;">
+                    <label for="FECHA_MMYYYY">Fecha</label>
+                </div>
+                <div class="form-group col-md-2 col-xs-2">
+                    <input name="FECHA_MMYYYY" type="text" class="form-control" disabled />
+                </div>
+                <div class="col-md-10 col-xs-10>"></div>
+
+                <div class="form-group col-md-12 col-xs-12" style="padding-right: 0px; margin-bottom: 0px; margin-top: 8px;">
+                    <label for="">Buscar Archivo</label>
+                </div>
+                <div class="form-group col-md-12 col-xs-12" style="margin-bottom: 0px;">
+                    <input id="archivo_deudores_oculto" name="archivo_deudores_oculto" type="file" style="display: none;" />
+                </div>
+                <div class="form-group col-md-10 col-xs-10" style="padding-right: 0px;">
+                    <input id="archivo_deudores" name="archivo_deudores" class="form-control" type="text" value="" disabled style="width: 100%; max-width: 100%;" />
+                </div>
+                <div class="form-group col-md-2 col-xs-2" style="width: 128px; padding-left: 24px;">
+                    <input id="btn_buscar" type="button" class="btn btn-primary" value="Examinar..." style="height: 34px; border-radius: 0px 4px 4px 0px;" onclick="$('#archivo_deudores_oculto').click();" />
+                </div>
+            </div>
+
+            <br />
+
+
+
+            <br />
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-xs-offset-2 col-md-4 col-xs-4">
+                    <input type="submit" value="Aceptar" class="btn btn-default" />
+                </div>
+                <div class="col-xs-pull-2 col-md-4 col-xs-4">
+                    <input type="button" value="Volver" class="btn btn-default" onclick="location.href = '/Exposiciones/Detalles';" />
+                    <!--<a class="btn btn-default" href="/Exposiciones/Importar">Volver</a>-->
+                </div>
+                @*Html.ActionLink("Volver", "Detalles")*@
+            </div>
+        </div>
+    </div>
+@*</form>*@
+}
+
+@section Scripts {
+    @Styles.Render("~/Detalles")
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script>
+    /*
+    function leerAdjunto() {
+        $("form")
+            .attr("action", "/Exposiciones/LeerAdjunto")
+            .submit();
+    }
+    */
+
+    var json_result = null;
+
+    $(document).ready(function () {
+        $("#archivo_deudores_oculto").change(
+            function (n, i) {
+                if ($("#archivo_deudores_oculto")[0].files != null) {
+                    if ($("#archivo_deudores_oculto")[0].files.length > 0) {
+                        var data = new FormData()
+
+                        $.each($('#archivo_deudores_oculto')[0].files, function (i, file) {
+                            data.append('file-' + i, file);
+                        });
+
+                        $.ajax({
+                            url: '/Importar/getFechaMMYYYY',
+                            data: data,
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            method: 'POST',
+                            success: function(data) {
+                                if (data != null) {
+                                    json_result = data;
+                                    $("input[name='FECHA_MMYYYY']").val(json_result.FECHA_MMYYYY);
+                                    $("#archivo_deudores").val(json_result.NOMBRE_ARCHIVO);
+                                }
+                            }
+                        });
+                    } else {
+                        $("input[name='FECHA_MMYYYY'], #archivo_deudores").val("");
+                    }
+                } else {
+                    $("input[name='FECHA_MMYYYY'], #archivo_deudores").val("");
+                }
+            }
+        );
+    });
+</script>
