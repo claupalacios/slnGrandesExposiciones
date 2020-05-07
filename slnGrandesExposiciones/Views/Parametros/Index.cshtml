@@ -17,10 +17,13 @@
 
 </head>
 <section class="content-principal">
-    <h2>Detalle de Deudores</h2>
+    <h2>Parámetros</h2>
 
     @*<img id="imgBarra" src="~/Content/Images/footer-orange-line.png" />*@
     <br /><br />
+
+    <a class="orange-button btn btn-outline-secondary" id="botonModificar" type="button" href="~/Parametros/Nuevo"><i class="fa fa-plus"></i></a>
+
     <table class="table">
         <tr>
             <th>
@@ -66,8 +69,11 @@
                     @Html.DisplayFor(modelItem => item.SMVM)
                 </td>
                 <td>
-                    <button id="botonModificar" data-id="@item.ID" type="button" class="orange-button btn btn-outline-secondary" data-toggle="modal" data-target="#modalModificar"><i class="fa fa-cog"></i></button>
+                    @*<button id="botonModificar" data-id="@item.ID" type="button" class="orange-button btn btn-outline-secondary" data-toggle="modal" data-target="#modalModificar"><i class="fa fa-cog"></i></button>*@
+                    <a class="orange-button btn btn-outline-secondary" id="botonModificar" type="button" href="~/Parametros/Editar/@item.ID"><i class="fa fa-cog"></i></a>
+
                 </td>
+
             </tr>
         }
 
@@ -103,14 +109,5 @@
     </div>
 
     <script>
-
-        $(document).on("click", "#botonModificar", function () {
-            var myBookId = $(this).data('id');
-            alert(myBookId);
-            // As pointed out in comments,
-            // it is unnecessary to have to manually call the modal.
-            // $('#addBookDialog').modal('show');
-        });
-
     </script>
     <!--FIN MODAL MODIFICAR-->

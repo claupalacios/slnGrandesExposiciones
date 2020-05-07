@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using slnGrandesExposiciones.Models;
 
+
 namespace slnGrandesExposiciones.Controllers
 {
     public class ParametrosController : Controller {
@@ -20,96 +21,102 @@ namespace slnGrandesExposiciones.Controllers
             return View(db.Parametros_Exposiciones.ToList());
         }
 
-        // GET: Parametros/Details/5
-        public ActionResult Details(int? id) {
-            if (id == null) {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+        public ActionResult Nuevo()
+        {
 
-            Parametros_Exposiciones parametros = db.Parametros_Exposiciones.Find(id);
-            if (parametros == null) {
-                return HttpNotFound();
-            }
-
-            return View(parametros);
-        }
-
-        // GET: Parametros/Create
-        public ActionResult Create() {
             return View();
         }
 
-        // POST: Parametros/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,PERIODO,TIR_1,TIR_2,TIR_3,SMVM")] Parametros_Exposiciones parametros) {
-            if (ModelState.IsValid) {
-                db.Parametros_Exposiciones.Add(parametros);
-                db.Entry(db.Parametros_Exposiciones.Last()).State = System.Data.Entity.EntityState.Added;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(parametros);
-        }
-
-        public ActionResult Configurar()
+        public ActionResult Nuevo(Parametros_Exposiciones model)
         {
-            List<Parametros_Exposiciones> parametros = db.Parametros_Exposiciones.ToList();
-          
-            return View("Configurar",parametros);
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    using (GrandesExposicionesEntities db = new GrandesExposicionesEntities())
+                    {
+                        var oTabla = new Parametros_Exposiciones();
+                        oTabla.TIER_1 = model.TIER_1;
+                        oTabla.TIER_2 = model.TIER_2;
+                        oTabla.TIER_3 = model.TIER_3;
+                        oTabla.SMVM = model.SMVM;
+
+                        db.Parametros_Exposiciones.Add(oTabla);
+                        db.SaveChanges();
+                    }
+
+                    return Redirect("~/Parametros/Index/");
+                }
+
+                return View(model);
+
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
-        // POST: Parametros/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        public ActionResult Editar(int Id)
+        {
+            Parametros_Exposiciones model = new Parametros_Exposiciones();
+            using (GrandesExposicionesEntities db = new GrandesExposicionesEntities())
+            {
+                var oTabla = db.Parametros_Exposiciones.Find(Id);
+                model.ID_PERIODO = oTabla.ID_PERIODO;
+                model.TIER_1 = oTabla.TIER_1;
+                model.TIER_2 = oTabla.TIER_2;
+                model.TIER_3 = oTabla.TIER_3;
+                model.SMVM = oTabla.SMVM;
+            }
+            return View(model);
+        }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Configurar([Bind(Include = "ID,PERIODO,TIR_1,TIR_2,TIR_3,SMVM")] Parametros_Exposiciones parametros) {
-            if (ModelState.IsValid) {
-                db.Entry(parametros).State = System.Data.Entity.EntityState.Modified;
+        public ActionResult Editar(Parametros_Exposiciones model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    using (GrandesExposicionesEntities db = new GrandesExposicionesEntities())
+                    {
+                        var oTabla = db.Parametros_Exposiciones.Find(model.ID);
+                        oTabla.TIER_1 = model.TIER_1;
+                        oTabla.TIER_2 = model.TIER_2;
+                        oTabla.TIER_3 = model.TIER_3;
+                        oTabla.SMVM = model.SMVM;
+
+                        db.Entry(oTabla).State = System.Data.Entity.EntityState.Modified;
+                        db.SaveChanges();
+                    }
+
+                    return Redirect("~/Parametros/Index/");
+                }
+
+                return View(model);
+
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult Eliminar(int Id)
+        {
+            using (GrandesExposicionesEntities db = new GrandesExposicionesEntities())
+            {
+
+                var oTabla = db.Parametros_Exposiciones.Find(Id);
+                db.Parametros_Exposiciones.Remove(oTabla);
                 db.SaveChanges();
-
-                return RedirectToRoute(new {
-                    controller = "Exposiciones",
-                    action = "Detalles"
-                });
             }
-            return View(parametros);
-        }
-
-        // GET: Parametros/Delete/5
-        public ActionResult Delete(int? id) {
-            if (id == null) {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            Parametros_Exposiciones parametros = db.Parametros_Exposiciones.Find(id);
-            if (parametros == null) {
-                return HttpNotFound();
-            }
-            return View(parametros);
-        }
-
-        // POST: Parametros/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id) {
-            Parametros_Exposiciones parametros = db.Parametros_Exposiciones.Find(id);
-            db.Parametros_Exposiciones.Remove(parametros);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing) {
-            if (disposing) {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            return Redirect("~/Tabla/");
         }
     }
 }

@@ -1,39 +1,70 @@
-﻿@model IEnumerable<slnGrandesExposiciones.Models.Valor_Campos>
+﻿@model IList<slnGrandesExposiciones.Dtos.TablaValoresDto>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.VALOR)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Campos.CAMPO)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Periodos.PERIODO)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.VALOR)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Campos.CAMPO)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Periodos.PERIODO)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
+@using NonFactors.Mvc.Grid;
+@{
+    ViewBag.Title = "Inicio";
 }
 
-</table>
+<head>
+    <link href="~/Content/MvcGrid/mvc-grid.css" rel="stylesheet">
+    <script src="~/Scripts/MvcGrid/mvc-grid.js"></script>
+    <script src="~/Scripts/Home/index.js"></script>
+
+
+    @Styles.Render("~/Content/bootstrap.css")
+    @Styles.Render("~/Content/Global.css")
+    @Styles.Render("~/Content/Archivos.css")
+    @Styles.Render("~/Content/Home.css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+</head>
+
+
+<section class="content-inner">
+
+    <div class="container-buttons row">
+        <span class="col-1"></span>
+        @*<button id="botonIngresar" type="button" class="" data-toggle="modal" data-target="#modalIngresar"></button>*@
+        <a class="orange-button col-2 btn btn-outline-secondary activo" id="botonModificar" type="button" href="~/Parametros/Nuevo"><i class="fa fa-plus">Total Por Grupo</i></a>
+        <span class="col-1"></span>
+        <button id="botonConfiguracionTir" type="button" class="orange-button col-2 btn btn-outline-secondary">Exposiciones Individual</button>
+        <span class="col-1"></span>
+        <button id="botonConfiguracionTir" type="button" class="orange-button col-2 btn btn-outline-secondary">Grupo Individual</button>
+        <span class="col-1"></span>
+
+    </div>
+    <br /><br />
+
+    @Html.AjaxGrid(Url.Action("IndexGrid"))
+    <div class="content-table">
+        @(Html
+                                                    .Grid(Model)
+                                                    .Build(columns =>
+                                                    {
+                                                        foreach (var item in Model)
+                                                        {
+                                                            columns.Add(modelItem => item.Valor).Titled(item.Titulo);
+                                                        }
+                                                    })
+                                                    .Empty("No se encontraron datos")
+                                                    .Id("my-ajax-grid")
+                                                    .Filterable()
+                                                    .Sortable()
+        )
+    </div>
+
+</section>
+
+
+<script>
+
+    $('.container-buttons button').on('click', function () {
+        if (!$(this).is('activo')) {
+            $('.activo').toggleClass('activo');
+            $(this).toggleClass('activo');
+        }
+    });
+
+</script>

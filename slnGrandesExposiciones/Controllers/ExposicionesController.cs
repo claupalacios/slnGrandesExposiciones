@@ -35,11 +35,7 @@ namespace slnGrandesExposiciones.Controllers
             }
         }
 
-        //[AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
-        //public PartialViewResult IndexGrid(String name)
-        //{
-        //    return PartialView("_IndexGrid", db.Exposiciones.Find(name));
-        //}
+        
 
     }
 }

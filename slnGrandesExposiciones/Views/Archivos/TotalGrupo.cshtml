@@ -1,63 +1,65 @@
-﻿@model IQueryable<slnGrandesExposiciones.Models.Campos>
+﻿@model IList<slnGrandesExposiciones.Dtos.TablaValoresDto>
 
 
 @using NonFactors.Mvc.Grid;
-
 @{
-    ViewBag.Title = "Ver Archivos";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Inicio";
 }
 
 <head>
     <link href="~/Content/MvcGrid/mvc-grid.css" rel="stylesheet">
     <script src="~/Scripts/MvcGrid/mvc-grid.js"></script>
-    <script src="~/Scripts/Archivos/index.js"></script>
+    <script src="~/Scripts/Home/index.js"></script>
 
 
     @Styles.Render("~/Content/bootstrap.css")
     @Styles.Render("~/Content/Global.css")
     @Styles.Render("~/Content/Archivos.css")
+    @Styles.Render("~/Content/Home.css")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
 
 </head>
 
-<h2>Detalle Periodo 2012/12/12</h2>
-<img id="imgBarra" src="~/Content/Images/footer-orange-line.png" />
 
-<br /><br />
+<section class="content-inner">
 
-<div class="container-buttons row">
-    <span class="col-1"></span>
-    <button id="botonIngresar" type="button" class="orange-button col-2 btn btn-outline-secondary activo" data-toggle="modal" data-target="#modalIngresar">Total Por Grupo</button>
-    <span class="col-1"></span>
-    <button id="botonConfiguracionTir" type="button" class="orange-button col-2 btn btn-outline-secondary">Exposiciones Individual</button>
-    <span class="col-1"></span>
-    <button id="botonConfiguracionTir" type="button" class="orange-button col-2 btn btn-outline-secondary">Grupo Individual</button>
-    <span class="col-1"></span>
+    <div class="container-buttons row">
+        <span class="col-1"></span>
+        @*<button id="botonIngresar" type="button" class="" data-toggle="modal" data-target="#modalIngresar"></button>*@
+        <a class="orange-button col-2 btn btn-outline-secondary activo" id="botonModificar" type="button" href="~/Parametros/Nuevo"><i class="fa fa-plus">Total Por Grupo</i></a>
+        <span class="col-1"></span>
+        <button id="botonConfiguracionTir" type="button" class="orange-button col-2 btn btn-outline-secondary">Exposiciones Individual</button>
+        <span class="col-1"></span>
+        <button id="botonConfiguracionTir" type="button" class="orange-button col-2 btn btn-outline-secondary">Grupo Individual</button>
+        <span class="col-1"></span>
 
-</div>
+    </div>
+    <br /><br />
+
+    @Html.AjaxGrid(Url.Action("IndexGrid"))
+    <div class="content-table">
+        @(Html
+                                                    .Grid(Model)
+                                                    .Build(columns =>
+                                                    {
+                                                        foreach (var item in Model)
+                                                        {
+                                                            columns.Add(modelItem => item.Valor).Titled(item.Titulo);
+                                                        }
+                                                    })
+                                                    .Empty("No se encontraron datos")
+                                                    .Id("my-ajax-grid")
+                                                    .Filterable()
+                                                    .Sortable()
+        )
+    </div>
+
+</section>
 
 
-
-
-@*<img id="imgBarra" src="~/Content/Images/footer-orange-line.png" />*@
-<br /><br />
-
-<div class="content-table">
-    @(
-                                                                                                                                                       Html.Grid(Model)
-                                                                                                                                                          .Build(columns =>
-                                                                                                                                                          {
-                                                                                                                                                              columns.Add(model => model.ALIAS).Titled("FECHA MMYYYY").Sortable(true);
-                                                                                                                                                          })
-                                                                                                                                                        .Empty("No se encontraron coincidencias")
-            //.RowAttributed(model => new { @id = model.ID }) //Le pone el ID a la fila tr
-    )
-</div>
-@*@{Html.RenderPartial("login", ViewBag.Login);}
-@{Html.RenderPartial("register", ViewBag.Register);}*@
 <script>
+
     $('.container-buttons button').on('click', function () {
         if (!$(this).is('activo')) {
             $('.activo').toggleClass('activo');
