@@ -8,7 +8,7 @@
 <head>
     <link href="~/Content/MvcGrid/mvc-grid.css" rel="stylesheet">
     <script src="~/Scripts/MvcGrid/mvc-grid.js"></script>
-
+    <script src="~/Scripts/Parametros/Parametros.js"></script>
 
     @Styles.Render("~/Content/bootstrap.css")
     @Styles.Render("~/Content/Global.css")
@@ -19,10 +19,27 @@
 <section class="content-principal">
     <h2>Parámetros</h2>
 
-    @*<img id="imgBarra" src="~/Content/Images/footer-orange-line.png" />*@
-    <br /><br />
+    @*<div class="alert alert-success alert-dismissible fade" role="alert" id="buttonSuccess">
+            <p>Parámetro ingresado con éxito</p>
+            <button type="button" class="close"  aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>*@
+    <div id="myAlertSuccess" class="alert alert-success collapse">
+        <a id="linkClose" data-dismiss="alert" href="#" class="close">&times;</a>
+         Parámetro eliminado con éxito!
+    </div>
+    <div id="myAlertDanger" class="alert alert-danger collapse">
+        <a id="linkClose" href="#" data-dismiss="alert" class="close">&times;</a>
+        Reinicie la aplicación y vuelva a intentar.
+    </div>
 
-    <a class="orange-button btn btn-outline-secondary" id="botonModificar" type="button" href="~/Parametros/Nuevo"><i class="fa fa-plus"></i></a>
+   
+    <br />
+    <div style="text-align:right">
+        <a class="orange-button btn btn-outline-secondary" id="botonNuevo" type="button" href="~/Parametros/Nuevo">Ingresar Parámetro &nbsp;<i class="fa fa-plus"></i></a>
+    </div>
+    <br />
 
     <table class="table">
         <tr>
@@ -46,7 +63,10 @@
 
             </th>
             <th>
-                <span>MODIFICAR</span>
+                <span>Modificar</span>
+            </th>
+            <th>
+                <span>Eliminar</span>
             </th>
         </tr>
 
@@ -69,9 +89,10 @@
                     @Html.DisplayFor(modelItem => item.SMVM)
                 </td>
                 <td>
-                    @*<button id="botonModificar" data-id="@item.ID" type="button" class="orange-button btn btn-outline-secondary" data-toggle="modal" data-target="#modalModificar"><i class="fa fa-cog"></i></button>*@
-                    <a class="orange-button btn btn-outline-secondary" id="botonModificar" type="button" href="~/Parametros/Editar/@item.ID"><i class="fa fa-cog"></i></a>
-
+                    <a class="orange-button btn btn-outline-secondary" type="button" href="~/Parametros/Editar/@item.ID"><i class="fa fa-cog"></i></a>
+                </td>
+                <td>
+                    <a class="orange-button btn btn-outline-secondary delete" data-id="@item.ID" type="button" data-toggle="modal" data-target="#modalEliminar"><i class="fa fa-trash"></i></a>
                 </td>
 
             </tr>
@@ -79,35 +100,26 @@
 
 
     </table>
+
 </section>
 
-    <!--MODAL MODIFICAR-->
-    <div class="modal fade " id="modalModificar" tabindex="-1" role="dialog" aria-labelledby="modalModificarLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalModificarLabel">Modificar Parámetro</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        @*@Html.LabelFor(item => item.., new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.LastName)
-                                @Html.ValidationMessageFor(model => model.LastName)*@
-                    </div>
-                </div>
+<!--MODAL INGRESAR EXCEL-->
+<div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="modalEliminarLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalEliminarLabel">Eliminar Parámetro</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro que desea eliminar el parámetro?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-outline-secondary confirm-button">Aceptar</button>
+                <button type="button" id="aceptarBoton" class="btn btn-outline-secondary confirm-button" data-dismiss="modal" data-toggle="modal" data-target="#modalAtencion">Aceptar</button>
             </div>
         </div>
     </div>
-    </div>
-
-    <script>
-    </script>
-    <!--FIN MODAL MODIFICAR-->
+</div>

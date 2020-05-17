@@ -107,16 +107,22 @@ namespace slnGrandesExposiciones.Controllers
         }
 
         [HttpGet]
-        public ActionResult Eliminar(int Id)
+        public void Eliminar(int Id)
         {
-            using (GrandesExposicionesEntities db = new GrandesExposicionesEntities())
+            try
+            {
+                    using (GrandesExposicionesEntities db = new GrandesExposicionesEntities())
             {
 
-                var oTabla = db.Parametros_Exposiciones.Find(Id);
-                db.Parametros_Exposiciones.Remove(oTabla);
+                var elemento = db.Parametros_Exposiciones.Find(Id);
+                db.Parametros_Exposiciones.Remove(elemento);
                 db.SaveChanges();
             }
-            return Redirect("~/Tabla/");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

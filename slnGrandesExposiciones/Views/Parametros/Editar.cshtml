@@ -1,41 +1,48 @@
 ﻿@model slnGrandesExposiciones.Models.Parametros_Exposiciones
 @{
-    ViewBag.Title = "Editar Parámetro";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    <link href="~/Content/Parametros.css" rel="stylesheet" />
 }
-
-<h2>@ViewBag.Title</h2>
 
 
 @using (Html.BeginForm("Editar", "Parametros", FormMethod.Post))
 {
     <div class="row">
         <div class="col-md-12">
-            @*@Html.HiddenFor(d => d.Id)*@
-            <div>
-                @Html.LabelFor(d => d.TIER_1)
-                @Html.TextBoxFor(d => d.TIER_1, "", new { @class = "form-control" })
-                @Html.ValidationMessageFor(d => d.TIER_1, null, new { @class = "red" })
-            </div>
-            <div>
-                @Html.LabelFor(d => d.TIER_2)
-                @Html.TextBoxFor(d => d.TIER_2, "", new { @class = "form-control" })
-                @Html.ValidationMessageFor(d => d.TIER_2, null, new { @class = "red" })
-            </div>
-            <div>
-                @Html.LabelFor(d => d.TIER_3)
-                @Html.TextBoxFor(d => d.TIER_3, "", new { @class = "form-control" })
-                @Html.ValidationMessageFor(d => d.TIER_3, null, new { @class = "red" })
-            </div>
-            <div>
-                @Html.LabelFor(d => d.SMVM)
-                @Html.TextBoxFor(d => d.SMVM, "", new { @class = "form-control" })
-                @Html.ValidationMessageFor(d => d.SMVM, null, new { @class = "red" })
-            </div>
+            <h2>Modificación de parámetro</h2>
             <br />
-            <div style="text-align:right;">
-                <input value="Guardar" class="btn btn-primary" type="submit" />
-            </div>
+            @*@Html.HiddenFor(d => d.Id)*@
+                <div>
+                    @Html.LabelFor(d => d.ID_PERIODO, "PERIODO")
+                    @Html.TextBoxFor(d => d.ID_PERIODO, "", new { @class = "form-control", @placeholder = "Ej: 2020/05" })
+                    @Html.ValidationMessageFor(d => d.ID_PERIODO, null, new { @class = "red" })
+                </div>
+                <div>
+                    @Html.LabelFor(d => d.TIER_1)
+                    @Html.TextBoxFor(d => d.TIER_1, "", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(d => d.TIER_1, null, new { @class = "red" })
+                </div>
+                <div>
+                    @Html.LabelFor(d => d.TIER_2)
+                    @Html.TextBoxFor(d => d.TIER_2, "", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(d => d.TIER_2, null, new { @class = "red" })
+                </div>
+                <div>
+                    @Html.LabelFor(d => d.TIER_3)
+                    @Html.TextBoxFor(d => d.TIER_3, "", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(d => d.TIER_3, null, new { @class = "red" })
+                </div>
+                <div>
+                    @Html.LabelFor(d => d.SMVM)
+                    @Html.TextBoxFor(d => d.SMVM, "", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(d => d.SMVM, null, new { @class = "red" })
+                </div>
+
+                <br />
+                <div class="d-flex justify-content-between">
+                    <a class="orange-button btn btn-outline-secondary" id="botonModificar" type="button" href="~/Parametros/Index">Volver</a>
+                    <input value="Guardar" class="orange-button btn btn-outline-secondary activo" type="submit" />
+                </div>
         </div>
 
     </div>

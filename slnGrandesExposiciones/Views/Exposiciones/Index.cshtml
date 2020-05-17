@@ -16,12 +16,21 @@
     <link href="~/Content/bootstrap-datepicker.min.css" rel="stylesheet" />
     <link href="~/Content/bootstrap-datetimepicker.css" rel="stylesheet" />
     <link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
+
+    @*<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-
+datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-
+datepicker/1.4.1/css/bootstrap-datepicker3.css" />*@
     <link href="~/Content/MvcGrid/mvc-grid.css" rel="stylesheet">
     <script src="~/Scripts/MvcGrid/mvc-grid.js"></script>
     <script src="~/Scripts/Home/index.js"></script>
 
 </head>
-
+<style>
+    .ui-datepicker-calendar {
+        display: none;
+    }
+</style>
 
 <section class="content-inner">
 
@@ -29,7 +38,7 @@
         <span class="col-2"></span>
         <button id="botonIngresar" type="button" class="orange-button col-3 btn btn-outline-secondary" data-toggle="modal" data-target="#modalIngresar"><i class="fa fa-plus"></i>&nbsp;Ingresar Informe</button>
         <span class="col-2"></span>
-        <button id="botonConfiguracionTir" type="button" class="orange-button col-3 btn btn-outline-secondary"><i class="fa fa-sliders"></i><a href=@Url.Content("~/Parametros/Index")>&nbsp;Configuración de TIERS</a></button>
+        <a type="button" class="orange-button col-3 btn btn-outline-secondary" href=@Url.Content("~/Parametros/Index")><i class="fa fa-sliders"></i>&nbsp;Configuración de TIERS</a>
         <span class="col-2"></span>
 
     </div>
@@ -45,10 +54,11 @@
                         columns.Add(model => model.ID_PERIODO).Titled("Periodo");
                         columns.Add(model => model.LEGAJO).Titled("Legajo");
                         columns.Add(model => model.VALIDADO).Titled("Validado");
-                        columns.Add(model => "<i data-id=\"" + model.ID + "\" class=\"" + "fa fa-upload orange-button btn border-off" + "\"></i>").Encoded(false).Titled("IMPORTAR");
-                        columns.Add(model => "<a href = \"" + "/Archivos/ExpIndividual" + "\")>  <i data-id=\"" + model.ID + "\" class=\"" + "fa fa-eye orange-button btn border-off" + "\"></i></button>").Encoded(false).Titled("VER");
-                        columns.Add(model => "<i data-id=\"" + model.ID + "\" class=\"" + "fa fa-download orange-button btn border-off" + "\"></i>").Encoded(false).Titled("DESCARGAR");
-                        columns.Add(model => "<i data-id=\"" + model.ID + "\" class=\"" + "fa fa-angle-double-right orange-button btn border-off" + "\"></i>").Encoded(false).Titled("GENERAR");
+                        columns.Add(model => "<i data-id=\"" + model.ID + "\" class=\"" + "fa fa-upload orange-button btn border-off" + "\"></i>").Encoded(false).Titled("Importar");
+                        columns.Add(model => "<a href = \"" + "/Archivos/ExpIndividual" + "\")>  <i data-id=\"" + model.ID + "\" class=\"" + "fa fa-eye orange-button btn border-off" + "\"></i></button>").Encoded(false).Titled("Ver");
+                        columns.Add(model => "<i data-id=\"" + model.ID + "\" class=\"" + "fa fa-download orange-button btn border-off" + "\"></i>").Encoded(false).Titled("Descargar");
+                        columns.Add(model => "<i data-id=\"" + model.ID + "\" class=\"" + "fa fa-check orange-button btn border-off" + "\"></i>").Encoded(false).Titled("Validar");
+                        columns.Add(model => "<i data-id=\"" + model.ID + "\" class=\"" + "fa fa-angle-double-right orange-button btn border-off" + "\"></i>").Encoded(false).Titled("Generar");
                     })
                     .Empty("No se encontraron datos")
                     .Id("my-ajax-grid")
@@ -77,10 +87,12 @@
             </div>
             <div class="modal-body">
                 <form>
-                    <div class="form-group">
+                    @*<div class="form-group">
                         <label for="startDate">Fecha: </label>
                         <input name="startDate" id="startDate" class="date-picker" />
-                    </div>
+                    </div>*@
+                    <label for="startDate">Date :</label>
+                    <input name="startDate" id="startDate" class="date-picker" />
                     <div class="form-group">
                         <label for="excelFile" class="col-form-label">Seleccionar Archivo:</label>
                         <input type="file" name="file" id="excelFile" />
@@ -116,3 +128,7 @@
     </div>
 </div>
 <!--FIN MODAL ATENCIÓN-->
+
+
+<script>
+</script>

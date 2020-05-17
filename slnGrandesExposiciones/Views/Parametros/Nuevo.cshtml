@@ -1,16 +1,27 @@
 ﻿@model slnGrandesExposiciones.Models.Parametros_Exposiciones
 @{
-    ViewBag.Title = "Nuevo Parámetro";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@ViewBag.Title</h2>
+<head>
+    @Styles.Render("~/Content/Global.css")
+    @Styles.Render("~/Content/Parametros.css")
+</head>
+
+
 
 
 @using (Html.BeginForm("Nuevo", "Parametros", FormMethod.Post))
 {
     <div class="row">
         <div class="col-md-12">
+            <h2>Ingreso de nuevo parámetro</h2>
+            <br />
+            <div>
+                @Html.LabelFor(d => d.ID_PERIODO, "PERIODO")
+                @Html.TextBoxFor(d => d.ID_PERIODO, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.ID_PERIODO, null, new { @class = "red" })
+            </div>
             <div>
                 @Html.LabelFor(d => d.TIER_1)
                 @Html.TextBoxFor(d => d.TIER_1, "", new { @class = "form-control" })
@@ -32,10 +43,15 @@
                 @Html.ValidationMessageFor(d => d.SMVM, null, new { @class = "red" })
             </div>
             <br />
-            <div style="text-align:right;">
-                <input value="Guardar" class="btn btn-primary" type="submit" />
+
+            <div class="d-flex justify-content-between">
+                <a class="orange-button btn btn-outline-secondary" id="botonModificar" type="button" href="~/Parametros/Index">Volver</a>
+                <input value="Guardar" class="orange-button btn btn-outline-secondary activo" type="submit" />
             </div>
+
+
+
         </div>
 
-    </div>
+        </div>
 }

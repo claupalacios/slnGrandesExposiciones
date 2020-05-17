@@ -23,9 +23,12 @@ namespace slnGrandesExposiciones.Controllers
             try
             {     
             Log.Information("ExposicionesController - Obteniendo Exposiciones");
-            var query = db.Exposiciones;
-            return View(query);
-                
+                //var queryExposiciones = db.Exposiciones;
+                //var queryPeriodos = db.Periodos;
+                //    queryExposiciones
+                //    return View(query);
+                var query = db.Exposiciones;
+                return View(query);
             }
         
             catch (Exception ex)

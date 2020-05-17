@@ -11,14 +11,23 @@ namespace slnGrandesExposiciones.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Parametros_Exposiciones
     {
         public int ID { get; set; }
         public Nullable<int> ID_PERIODO { get; set; }
+
+        [Required(ErrorMessage = "Campo requerido")]
         public Nullable<double> TIER_1 { get; set; }
+
+        [Required(ErrorMessage = "Campo requerido")]
         public Nullable<double> TIER_2 { get; set; }
+
+        [Required(ErrorMessage = "Campo requerido")]
         public Nullable<double> TIER_3 { get; set; }
+
+        [Required(ErrorMessage = "Campo requerido")]
         public Nullable<double> SMVM { get; set; }
     
         public virtual Periodos Periodos { get; set; }

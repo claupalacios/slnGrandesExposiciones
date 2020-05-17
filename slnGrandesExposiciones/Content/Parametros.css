@@ -1,0 +1,14 @@
+﻿.container-form-buttons {
+    width: 200px;
+    display: inline-block;
+    overflow: auto;
+    white-space: nowrap;
+    margin: 0px auto;
+    border: 1px red solid;
+}
+.container-back{
+    text-align:left;
+}
+.container-save {
+    text-align: right;
+}
