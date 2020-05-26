@@ -13,30 +13,29 @@
     @Scripts.Render("~/bundles/bootstrap")
     @*@Styles.Render("~/Content/bootstrap-datepicker.css")*@
     <link href="~/Content/MvcGrid/mvc-grid.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap-datepicker.min.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap-datetimepicker.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
-
-    @*<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-
-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-
-datepicker/1.4.1/css/bootstrap-datepicker3.css" />*@
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/base/jquery-ui.css">
     <link href="~/Content/MvcGrid/mvc-grid.css" rel="stylesheet">
     <script src="~/Scripts/MvcGrid/mvc-grid.js"></script>
-    <script src="~/Scripts/Home/index.js"></script>
-
+    <script src="~/Scripts/datePickerMonthYear.js"></script>
 </head>
-<style>
-    .ui-datepicker-calendar {
-        display: none;
-    }
-</style>
+
+<div id="myAlertSuccess" class="alert alert-success collapse">
+    <a id="linkClose" data-dismiss="alert" href="#" class="close">&times;</a>
+    Parámetro eliminado con éxito!
+</div>
+<div id="myAlertDanger" class="alert alert-danger collapse">
+    <a id="linkClose" href="#" data-dismiss="alert" class="close">&times;</a>
+    Reinicie la aplicación y vuelva a intentar.
+</div>
 
 <section class="content-inner">
 
     <div class="container-buttons row">
         <span class="col-2"></span>
-        <button id="botonIngresar" type="button" class="orange-button col-3 btn btn-outline-secondary" data-toggle="modal" data-target="#modalIngresar"><i class="fa fa-plus"></i>&nbsp;Ingresar Informe</button>
+        @*<button id="botonIngresar" type="button" class="orange-button col-3 btn btn-outline-secondary" data-toggle="modal" data-target="#modalIngresar"><i class="fa fa-plus"></i>&nbsp;Ingresar Informe</button>*@
+        <a type="button" class="orange-button col-3 btn btn-outline-secondary" href=@Url.Content("~/Exposiciones/Nuevo")><i class="fa fa-plus"></i>&nbsp;Ingresar Informe</a>
         <span class="col-2"></span>
         <a type="button" class="orange-button col-3 btn btn-outline-secondary" href=@Url.Content("~/Parametros/Index")><i class="fa fa-sliders"></i>&nbsp;Configuración de TIERS</a>
         <span class="col-2"></span>
@@ -44,36 +43,32 @@ datepicker/1.4.1/css/bootstrap-datepicker3.css" />*@
     </div>
     <br /><br />
 
+
+
     <div class="content-table">
         @(Html
-                    .Grid(Model)
-                    .Build(columns =>
-                    {
-                        columns.Add(model => model.FECHA_ALTA).Titled("Fecha de Alta");
-                        columns.Add(model => model.FECHA_MOD).Titled("Fecha Ult Modifación");
-                        columns.Add(model => model.ID_PERIODO).Titled("Periodo");
-                        columns.Add(model => model.LEGAJO).Titled("Legajo");
-                        columns.Add(model => model.VALIDADO).Titled("Validado");
-                        columns.Add(model => "<i data-id=\"" + model.ID + "\" class=\"" + "fa fa-upload orange-button btn border-off" + "\"></i>").Encoded(false).Titled("Importar");
-                        columns.Add(model => "<a href = \"" + "/Archivos/ExpIndividual" + "\")>  <i data-id=\"" + model.ID + "\" class=\"" + "fa fa-eye orange-button btn border-off" + "\"></i></button>").Encoded(false).Titled("Ver");
-                        columns.Add(model => "<i data-id=\"" + model.ID + "\" class=\"" + "fa fa-download orange-button btn border-off" + "\"></i>").Encoded(false).Titled("Descargar");
-                        columns.Add(model => "<i data-id=\"" + model.ID + "\" class=\"" + "fa fa-check orange-button btn border-off" + "\"></i>").Encoded(false).Titled("Validar");
-                        columns.Add(model => "<i data-id=\"" + model.ID + "\" class=\"" + "fa fa-angle-double-right orange-button btn border-off" + "\"></i>").Encoded(false).Titled("Generar");
-                    })
-                    .Empty("No se encontraron datos")
-                    .Id("my-ajax-grid")
-                    .Pageable(pager =>
-                    {
-                        pager.PagesToDisplay = 2;
-                        pager.RowsPerPage = 2;
-                    })
-                    .Filterable()
-                    .Sortable()
+                                                    .Grid(Model)
+                                                    .Build(columns =>
+                                                    {
+                                                        columns.Add(model => model.FECHA_ALTA).Titled("Fecha de Alta");
+                                                        columns.Add(model => model.FECHA_MOD).Titled("Fecha Ult Modifación");
+                                                        columns.Add(model => model.ID_PERIODO).Titled("Periodo");
+                                                        columns.Add(model => model.LEGAJO).Titled("Legajo");
+                                                        columns.Add(model => model.VALIDADO).Titled("Validado");
+                                                        columns.Add(model => "<i data-id=\"" + model.ID + "\" class=\"" + "fa fa-upload orange-button btn border-off" + "\"></i>").Encoded(false).Titled("Importar");
+                                                        columns.Add(model => "<a href = \"" + "/Archivos/ExpIndividual" + "\")>  <i data-id=\"" + model.ID + "\" class=\"" + "fa fa-eye orange-button btn border-off" + "\"></i></button>").Encoded(false).Titled("Ver");
+                                                        columns.Add(model => "<i data-id=\"" + model.ID + "\" class=\"" + "fa fa-download orange-button btn border-off" + "\"></i>").Encoded(false).Titled("Descargar");
+                                                        columns.Add(model => "<i data-id=\"" + model.ID + "\" class=\"" + "fa fa-check orange-button btn border-off" + "\"></i>").Encoded(false).Titled("Validar");
+                                                        columns.Add(model => "<i data-id=\"" + model.ID + "\" class=\"" + "fa fa-angle-double-right orange-button btn border-off" + "\"></i>").Encoded(false).Titled("Generar");
+                                                    })
+                                                    .Empty("No se encontraron datos")
+                                                    .Id("my-ajax-grid")
+                                                    .Filterable()
+                                                    .Sortable()
         )
     </div>
 
 </section>
-
 
 <!--MODAL INGRESAR EXCEL-->
 <div class="modal fade" id="modalIngresar" tabindex="-1" role="dialog" aria-labelledby="modalIngresarLabel" aria-hidden="true">
@@ -87,12 +82,9 @@ datepicker/1.4.1/css/bootstrap-datepicker3.css" />*@
             </div>
             <div class="modal-body">
                 <form>
-                    @*<div class="form-group">
-                        <label for="startDate">Fecha: </label>
-                        <input name="startDate" id="startDate" class="date-picker" />
-                    </div>*@
-                    <label for="startDate">Date :</label>
+                    <label for="startDate">Periodo: </label>
                     <input name="startDate" id="startDate" class="date-picker" />
+                    <br />
                     <div class="form-group">
                         <label for="excelFile" class="col-form-label">Seleccionar Archivo:</label>
                         <input type="file" name="file" id="excelFile" />
@@ -101,7 +93,7 @@ datepicker/1.4.1/css/bootstrap-datepicker3.css" />*@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-outline-secondary confirm-button" data-toggle="modal" data-target="#modalAtencion">Aceptar</button>
+                <button type="button" id="confirm-button" class="btn btn-outline-secondary confirm-button" data-toggle="modal">Aceptar</button>
             </div>
         </div>
     </div>
@@ -128,7 +120,3 @@ datepicker/1.4.1/css/bootstrap-datepicker3.css" />*@
     </div>
 </div>
 <!--FIN MODAL ATENCIÓN-->
-
-
-<script>
-</script>

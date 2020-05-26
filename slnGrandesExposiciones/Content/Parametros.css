@@ -12,3 +12,11 @@
 .container-save {
     text-align: right;
 }
+
+.ui-datepicker-calendar {
+    display: none;
+}
+
+#ui-datepicker-div {
+    z-index: 1151 !important;
+}

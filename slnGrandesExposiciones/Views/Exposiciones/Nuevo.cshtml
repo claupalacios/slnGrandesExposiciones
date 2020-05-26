@@ -1,0 +1,53 @@
+﻿@model slnGrandesExposiciones.Models.Archivos_Exposiciones
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    @Styles.Render("~/Content/Global.css")
+    @Styles.Render("~/Content/Parametros.css")
+    <script src="~/Scripts/datePickerMonthYear.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/base/jquery-ui.css">
+</head>
+
+
+
+
+@using (Html.BeginForm("Nuevo", "Exposiciones", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Ingreso de nueva Exposición</h2>
+            <br />
+            <div>
+                @Html.LabelFor(d => d.ID_PERIODO, "PERIODO")
+                @Html.TextBoxFor(d => d.ID_PERIODO, "", new { @class = "form-control date-picker", @id = "startDate", @name = "startDate", autocomplete = "off" })
+                @Html.ValidationMessageFor(d => d.ID_PERIODO, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.NOMBRE)
+                @Html.TextBoxFor(d => d.NOMBRE, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.NOMBRE, null, new { @class = "red" })
+            </div>
+            @*<div>
+                @Html.LabelFor(d => d.CONTENIDO)
+                @Html.TextBoxFor(d => d.CONTENIDO, "", new { @class = "form-control", type = "file", name = "file" })
+                @Html.ValidationMessageFor(d => d.CONTENIDO, null, new { @class = "red" })
+            </div>*@
+                <input id="Foto" name="Foto" type="file" />
+
+            <br />
+
+            <div class="d-flex justify-content-between">
+                <a class="orange-button btn btn-outline-secondary" id="botonModificar" type="button" href="~/Parametros/Index">Volver</a>
+                <input value="Guardar" class="orange-button btn btn-outline-secondary activo" type="submit" />
+            </div>
+
+
+
+        </div>
+
+        </div>
+}

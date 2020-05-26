@@ -18,6 +18,7 @@ namespace slnGrandesExposiciones.Models
         public Tablas()
         {
             this.Campos = new HashSet<Campos>();
+            this.Archivos_Exposiciones = new HashSet<Archivos_Exposiciones>();
         }
     
         public int ID { get; set; }
@@ -25,5 +26,7 @@ namespace slnGrandesExposiciones.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Campos> Campos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Archivos_Exposiciones> Archivos_Exposiciones { get; set; }
     }
 }

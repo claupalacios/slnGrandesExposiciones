@@ -1,9 +1,12 @@
 ﻿.container-buttons{
     text-align:center;
 }
+
 .ui-datepicker-calendar {
     display: none;
 }
 
-/*BUTTONS STYLES*/
+#ui-datepicker-div {
+    z-index: 1151 !important;
+}
 

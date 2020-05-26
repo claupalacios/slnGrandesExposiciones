@@ -25,7 +25,6 @@ namespace slnGrandesExposiciones.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Archivos_Exposiciones> Archivos_Exposiciones { get; set; }
         public virtual DbSet<Campos> Campos { get; set; }
         public virtual DbSet<Exposiciones> Exposiciones { get; set; }
         public virtual DbSet<Formulas> Formulas { get; set; }
@@ -33,5 +32,6 @@ namespace slnGrandesExposiciones.Models
         public virtual DbSet<Periodos> Periodos { get; set; }
         public virtual DbSet<Tablas> Tablas { get; set; }
         public virtual DbSet<Valor_Campos> Valor_Campos { get; set; }
+        public virtual DbSet<Archivos_Exposiciones> Archivos_Exposiciones { get; set; }
     }
 }

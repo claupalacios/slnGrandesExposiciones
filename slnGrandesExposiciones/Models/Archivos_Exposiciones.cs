@@ -11,16 +11,20 @@ namespace slnGrandesExposiciones.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Web;
+    using System.Web.Mvc;
+
+    //[Bind(Exclude = "CONTENIDO")]
     public partial class Archivos_Exposiciones
     {
         public int ID { get; set; }
-        public int ID_PERIODO { get; set; }
+        public Nullable<int> ID_PERIODO { get; set; }
+        public Nullable<int> TIPOTABLA { get; set; }
         public string NOMBRE { get; set; }
-        public string TIPO { get; set; }
-        public Nullable<int> LONGITUD { get; set; }
+
         public byte[] CONTENIDO { get; set; }
     
         public virtual Periodos Periodos { get; set; }
+        public virtual Tablas Tablas { get; set; }
     }
 }

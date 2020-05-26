@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="9ae7e6107216436bbda7bd516e53b2a3" Name="Diagram1">
-        <EntityTypeShape EntityType="GrandesExposicionesModel.Archivos_Exposiciones" Width="1.5" PointX="9.75" PointY="4" />
         <EntityTypeShape EntityType="GrandesExposicionesModel.Campos" Width="1.5" PointX="4.375" PointY="7" />
         <EntityTypeShape EntityType="GrandesExposicionesModel.Exposiciones" Width="1.5" PointX="6" PointY="1.625" />
         <EntityTypeShape EntityType="GrandesExposicionesModel.Formulas" Width="1.5" PointX="9" PointY="12.5" />
@@ -13,13 +12,15 @@
         <EntityTypeShape EntityType="GrandesExposicionesModel.Periodos" Width="1.5" PointX="3.625" PointY="3.875" />
         <EntityTypeShape EntityType="GrandesExposicionesModel.Tablas" Width="1.5" PointX="5.75" PointY="11.875" />
         <EntityTypeShape EntityType="GrandesExposicionesModel.Valor_Campos" Width="1.5" PointX="6.875" PointY="5.75" />
-        <AssociationConnector Association="GrandesExposicionesModel.FK__Archivos___ID_PE__62458BBE" />
         <AssociationConnector Association="GrandesExposicionesModel.FK__Campos__ID_FORMU__6CC31A31" />
         <AssociationConnector Association="GrandesExposicionesModel.FK__Campos__ID_TABLA__6BCEF5F8" />
         <AssociationConnector Association="GrandesExposicionesModel.FK__Valor_Cam__ID_CA__01BE3717" />
         <AssociationConnector Association="GrandesExposicionesModel.FK__Exposicio__ID_PE__737017C0" />
         <AssociationConnector Association="GrandesExposicionesModel.FK__Parametro__ID_PE__5F691F13" />
         <AssociationConnector Association="GrandesExposicionesModel.FK__Valor_Cam__ID_PE__02B25B50" />
+        <EntityTypeShape EntityType="GrandesExposicionesModel.Archivos_Exposiciones" Width="1.5" PointX="10" PointY="7.625" />
+        <AssociationConnector Association="GrandesExposicionesModel.FK__Archivos___ID_PE__11007AA7" />
+        <AssociationConnector Association="GrandesExposicionesModel.FK__Archivos___TIPOT__11F49EE0" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
