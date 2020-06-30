@@ -17,15 +17,35 @@ namespace slnGrandesExposiciones.Controllers
 {
     public class ExposicionesController : Controller
     {
-        private GrandesExposicionesEntities db = new GrandesExposicionesEntities();
 
         public ActionResult Index()
         {
             try
             {
-                Log.Information("ExposicionesController - Obteniendo Exposiciones");
-                var query = db.Exposiciones;
-                return View(query);
+                using (GrandesExposicionesEntities db = new GrandesExposicionesEntities())
+                {
+                    Log.Information("ExposicionesController - Obteniendo Exposiciones");
+
+                    var tablaPeriodos = db.Periodos.ToList();
+                    var tablaExposiciones = db.Exposiciones.ToList();
+
+                    var query =
+                        (from e in tablaExposiciones
+                         join p in tablaPeriodos on e.ID_PERIODO equals p.ID
+                         select new ExposicionesDto()
+                         {
+                             Id = e.ID,
+                             ID_PERIODO = p.PERIODO,
+                             FECHA_ALTA = e.FECHA_ALTA,
+                             FECHA_MOD = e.FECHA_MOD,
+                             Legajo = "L0693677",
+                             Validado = e.VALIDADO ? "Validado" : "Sin Validar"
+                         }).ToList();
+
+
+                    return View(query);
+
+                }
             }
 
             catch (Exception ex)
@@ -43,7 +63,7 @@ namespace slnGrandesExposiciones.Controllers
 
         [HttpPost]
 
-        public ActionResult Nuevo(Archivos_Exposiciones archivoModel , HttpPostedFileBase Foto)
+        public ActionResult Nuevo(Archivos_Exposiciones archivoModel, HttpPostedFileBase ExposicionExcel)
         {
             try
             {
@@ -58,11 +78,11 @@ namespace slnGrandesExposiciones.Controllers
                         DateTime hoy = DateTime.Now;
 
 
-                        byte[] imgBinaryData = new byte[Foto.ContentLength];
-                        int readresult = Foto.InputStream.Read(imgBinaryData, 0, Foto.ContentLength);
+                        byte[] imgBinaryData = new byte[ExposicionExcel.ContentLength];
+                        int readresult = ExposicionExcel.InputStream.Read(imgBinaryData, 0, ExposicionExcel.ContentLength);
                         //archivoExposicion.ID_PERIODO = archivoModel.ID_PERIODO; //ARREGLAR
 
-                        var periodo = periodos.Where(P => P.PERIODO == archivoModel.ID_PERIODO.ToString()).Select(Per => Per.ID).ToList();
+                        var periodo = periodos.Where(P => P.PERIODO == archivoModel.ID_PERIODO).Select(Per => Per.ID).ToList();
 
                         archivoExposicion.ID_PERIODO = periodo[0];
                         archivoExposicion.TIPOTABLA = 1;
@@ -102,6 +122,61 @@ namespace slnGrandesExposiciones.Controllers
         }
 
 
+        public ActionResult Validar(int id)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    using (GrandesExposicionesEntities db = new GrandesExposicionesEntities())
+                    {
+                        var tablaExposiciones = db.Exposiciones;
 
+                        var exposicion = tablaExposiciones.Where(Exp => Exp.ID == id).FirstOrDefault();
+
+                        exposicion.VALIDADO = true;
+                        db.SaveChanges();
+                    }
+
+                    return Redirect("~/Exposiciones/Index/");
+                }
+
+                return Redirect("~/Exposiciones/Index/");
+
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+
+        public FileContentResult Descargar(int id)
+        {
+            try
+            {
+                using (GrandesExposicionesEntities db = new GrandesExposicionesEntities())
+                {
+                    var tablaExposiciones = db.Exposiciones;
+                    var tablaArchivos = db.Archivos_Exposiciones;
+                    var tablaPeriodos = db.Periodos;
+
+                    var idPeriodo = tablaPeriodos.Where(Per => Per.PERIODO == id).Select(Peri => Peri.ID).FirstOrDefault();
+
+                    var archivo = tablaArchivos.Where(Exp => Exp.ID_PERIODO == idPeriodo).Select(Expo => Expo.CONTENIDO).FirstOrDefault();
+
+                    
+                    return File(archivo, System.Net.Mime.MediaTypeNames.Application.Octet, "Archivo.xlsx");
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+        }
     }
 }

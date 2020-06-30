@@ -17,22 +17,22 @@ namespace slnGrandesExposiciones.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Periodos()
         {
-            this.Exposiciones = new HashSet<Exposiciones>();
-            this.Parametros_Exposiciones = new HashSet<Parametros_Exposiciones>();
-            this.Valor_Campos = new HashSet<Valor_Campos>();
             this.Archivos_Exposiciones = new HashSet<Archivos_Exposiciones>();
+            this.Exposiciones = new HashSet<Exposiciones>();
+            this.Valor_Campos = new HashSet<Valor_Campos>();
+            this.Parametros_Exposiciones = new HashSet<Parametros_Exposiciones>();
         }
     
         public int ID { get; set; }
-        public string PERIODO { get; set; }
+        public int PERIODO { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Archivos_Exposiciones> Archivos_Exposiciones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Exposiciones> Exposiciones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Parametros_Exposiciones> Parametros_Exposiciones { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Valor_Campos> Valor_Campos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Archivos_Exposiciones> Archivos_Exposiciones { get; set; }
+        public virtual ICollection<Parametros_Exposiciones> Parametros_Exposiciones { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<slnGrandesExposiciones.Models.Exposiciones>
+﻿@model IList<slnGrandesExposiciones.Dtos.ExposicionesDto>
 @using NonFactors.Mvc.Grid;
 @{
     ViewBag.Title = "Inicio";
@@ -11,7 +11,7 @@
     @Styles.Render("~/Content/Global.css")
     @Styles.Render("~/Content/Home.css")
     @Scripts.Render("~/bundles/bootstrap")
-    @*@Styles.Render("~/Content/bootstrap-datepicker.css")*@
+    <script src="~/Scripts/Exposiciones/Exposiciones.js"></script>
     <link href="~/Content/MvcGrid/mvc-grid.css" rel="stylesheet" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
@@ -47,76 +47,52 @@
 
     <div class="content-table">
         @(Html
-                                                    .Grid(Model)
-                                                    .Build(columns =>
-                                                    {
-                                                        columns.Add(model => model.FECHA_ALTA).Titled("Fecha de Alta");
-                                                        columns.Add(model => model.FECHA_MOD).Titled("Fecha Ult Modifación");
-                                                        columns.Add(model => model.ID_PERIODO).Titled("Periodo");
-                                                        columns.Add(model => model.LEGAJO).Titled("Legajo");
-                                                        columns.Add(model => model.VALIDADO).Titled("Validado");
-                                                        columns.Add(model => "<i data-id=\"" + model.ID + "\" class=\"" + "fa fa-upload orange-button btn border-off" + "\"></i>").Encoded(false).Titled("Importar");
-                                                        columns.Add(model => "<a href = \"" + "/Archivos/ExpIndividual" + "\")>  <i data-id=\"" + model.ID + "\" class=\"" + "fa fa-eye orange-button btn border-off" + "\"></i></button>").Encoded(false).Titled("Ver");
-                                                        columns.Add(model => "<i data-id=\"" + model.ID + "\" class=\"" + "fa fa-download orange-button btn border-off" + "\"></i>").Encoded(false).Titled("Descargar");
-                                                        columns.Add(model => "<i data-id=\"" + model.ID + "\" class=\"" + "fa fa-check orange-button btn border-off" + "\"></i>").Encoded(false).Titled("Validar");
-                                                        columns.Add(model => "<i data-id=\"" + model.ID + "\" class=\"" + "fa fa-angle-double-right orange-button btn border-off" + "\"></i>").Encoded(false).Titled("Generar");
-                                                    })
-                                                    .Empty("No se encontraron datos")
-                                                    .Id("my-ajax-grid")
-                                                    .Filterable()
-                                                    .Sortable()
+                                                            .Grid(Model)
+                                                            .Build(columns =>
+                                                            {
+                                                                columns.Add(model => model.FECHA_ALTA).Titled("Fecha de Alta").Formatted("{0:d}"); ;
+                                                                columns.Add(model => model.FECHA_MOD).Titled("Fecha Ult Modifación").Formatted("{0:d}"); ;
+                                                                columns.Add(model => model.ID_PERIODO).Titled("Periodo");
+                                                                columns.Add(model => model.Legajo).Titled("Legajo");
+                                                                columns.Add(model => model.Validado).Titled("Validado");
+                                                                columns.Add(model => "<i data-id=\"" + model.Id + "\" class=\"" + "fa fa-upload orange-button btn border-off" + "\"></i>").Encoded(false).Titled("Importar");
+                                                                columns.Add(model => "<a href = \"" + "/Archivos/ExpIndividual" + "\")>  <i data-id=\"" + model.ID_PERIODO + "\" class=\"" + "fa fa-eye orange-button btn border-off" + "\"></i></button>").Encoded(false).Titled("Ver");
+                                                                columns.Add(model => "<i id=\"descargarBoton" + "\" data-id=\"" + model.ID_PERIODO + "\" class=\"" + "fa fa-download orange-button btn border-off" + "\"></i>").Encoded(false).Titled("Descargar");
+                                                                columns.Add(model => "<i id=\"validar" + "\" data-toggle=\"modal" + "\" data-target=\"#modalValidar" + "\" data-id=\"" + model.Id + "\" class=\"" + "fa fa-check orange-button btn border-off" + "\"></i>").Encoded(false).Titled("Validar");
+                                                                columns.Add(model => "<i data-id=\"" + model.ID_PERIODO + "\" class=\"" + "fa fa-angle-double-right orange-button btn border-off" + "\"></i>").Encoded(false).Titled("Generar");
+                                                            })
+                                                            .Empty("No se encontraron datos")
+                                                            .Id("my-ajax-grid")
+                                                            .Filterable()
+                                                            .Sortable()
         )
     </div>
 
 </section>
 
-<!--MODAL INGRESAR EXCEL-->
-<div class="modal fade" id="modalIngresar" tabindex="-1" role="dialog" aria-labelledby="modalIngresarLabel" aria-hidden="true">
+<!--MODAL VALIDAR EXCEL-->
+<div class="modal fade" id="modalValidar" tabindex="-1" role="dialog" aria-labelledby="modalValidarLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalIngresarLabel">Ingreso de archivo</h5>
+                <h5 class="modal-title" id="modalIngresarLabel">Validación de Exposición</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form>
-                    <label for="startDate">Periodo: </label>
-                    <input name="startDate" id="startDate" class="date-picker" />
-                    <br />
-                    <div class="form-group">
-                        <label for="excelFile" class="col-form-label">Seleccionar Archivo:</label>
-                        <input type="file" name="file" id="excelFile" />
-                    </div>
-                </form>
+                <p>¿Desea validar el documento seleccionado?</p>
+                <input type="text" name="exposicion" id="exposicion" value="" style="display:none;" />
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="button" id="confirm-button" class="btn btn-outline-secondary confirm-button" data-toggle="modal">Aceptar</button>
+                <button type="button" class="btn btn-outline-secondary confirm-button" id="aceptarValidacionBoton" data-dismiss="modal">Aceptar</button>
             </div>
         </div>
     </div>
 </div>
-<!--FIN MODAL INGRESAR EXCEL-->
-<!--MODAL ATENCIÓN-->
-<div class="modal fade" id="modalAtencion" tabindex="-1" role="dialog" aria-labelledby="modalAtencionLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalAtencionLabel"><i class="fa fa-exclamation-triangle"></i>&nbsp; ATENCIÓN</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <span>¿Está seguro que desea sobreescribir el archivo?</span>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-outline-secondary confirm-button">Aceptar</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!--FIN MODAL ATENCIÓN-->
+<!--FIN MODAL VALIDAR EXCEL-->
+
+<script>
+   
+</script>

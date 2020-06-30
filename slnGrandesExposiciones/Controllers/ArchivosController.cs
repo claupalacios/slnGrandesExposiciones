@@ -27,21 +27,13 @@ namespace slnGrandesExposiciones.Controllers
             var query =
                 (from v in valoresDataBase
                  join c in camposDataBase on v.ID_CAMPOS equals c.ID
-                 select new
+                 select new TablaValoresDto()
                  {
                      Titulo = c.ALIAS,
                      Valor = v.Valor
                  }).ToList();
-
-            List<TablaValoresDto> list = new List<TablaValoresDto>();
-
-            foreach (var elemento in query)
-            {
-                list.Add(new TablaValoresDto { Titulo = elemento.Titulo , Valor = elemento.Valor });
-
-            }
            
-            return View("ExpIndividual", list);
+            return View("ExpIndividual", query);
         }
 
 

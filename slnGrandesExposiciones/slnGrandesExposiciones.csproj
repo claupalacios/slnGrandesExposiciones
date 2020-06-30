@@ -186,6 +186,7 @@
     <Compile Include="Controllers\ExposicionesController.cs" />
     <Compile Include="Controllers\ArchivosController.cs" />
     <Compile Include="Controllers\ParametrosController.cs" />
+    <Compile Include="Dtos\Parametros.cs" />
     <Compile Include="Dtos\TablaValores.cs" />
     <Compile Include="Dtos\Exposiciones.cs" />
     <Compile Include="Global.asax.cs">

@@ -15,11 +15,11 @@ namespace slnGrandesExposiciones.Models
     public partial class Exposiciones
     {
         public int ID { get; set; }
-        public Nullable<int> ID_PERIODO { get; set; }
-        public Nullable<System.DateTime> FECHA_ALTA { get; set; }
-        public Nullable<System.DateTime> FECHA_MOD { get; set; }
+        public int ID_PERIODO { get; set; }
+        public System.DateTime FECHA_ALTA { get; set; }
+        public System.DateTime FECHA_MOD { get; set; }
         public string LEGAJO { get; set; }
-        public Nullable<bool> VALIDADO { get; set; }
+        public bool VALIDADO { get; set; }
     
         public virtual Periodos Periodos { get; set; }
     }

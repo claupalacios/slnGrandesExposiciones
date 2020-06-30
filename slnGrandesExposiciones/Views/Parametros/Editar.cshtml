@@ -4,7 +4,11 @@
     <link href="~/Content/Parametros.css" rel="stylesheet" />
 }
 
-
+<style>
+    .margin{
+        border:2px solid blue;
+    }
+</style>
 @using (Html.BeginForm("Editar", "Parametros", FormMethod.Post))
 {
     <div class="row">
@@ -13,27 +17,27 @@
             <br />
             @*@Html.HiddenFor(d => d.Id)*@
                 <div>
-                    @Html.LabelFor(d => d.ID_PERIODO, "PERIODO")
-                    @Html.TextBoxFor(d => d.ID_PERIODO, "", new { @class = "form-control", @placeholder = "Ej: 2020/05" })
+                    @Html.LabelFor(d => d.ID_PERIODO, "PERIODO", new { @class = "d-block font-weight-bold" })
+                    <span class="form-control">@Html.DisplayFor(d => d.ID_PERIODO)</span>
                     @Html.ValidationMessageFor(d => d.ID_PERIODO, null, new { @class = "red" })
                 </div>
                 <div>
-                    @Html.LabelFor(d => d.TIER_1)
+                    @Html.LabelFor(d => d.TIER_1, new { @class = "d-block font-weight-bold" })
                     @Html.TextBoxFor(d => d.TIER_1, "", new { @class = "form-control" })
                     @Html.ValidationMessageFor(d => d.TIER_1, null, new { @class = "red" })
                 </div>
                 <div>
-                    @Html.LabelFor(d => d.TIER_2)
+                    @Html.LabelFor(d => d.TIER_2, new { @class = "d-block font-weight-bold" })
                     @Html.TextBoxFor(d => d.TIER_2, "", new { @class = "form-control" })
                     @Html.ValidationMessageFor(d => d.TIER_2, null, new { @class = "red" })
                 </div>
                 <div>
-                    @Html.LabelFor(d => d.TIER_3)
+                    @Html.LabelFor(d => d.TIER_3, new { @class = "d-block font-weight-bold" })
                     @Html.TextBoxFor(d => d.TIER_3, "", new { @class = "form-control" })
                     @Html.ValidationMessageFor(d => d.TIER_3, null, new { @class = "red" })
                 </div>
                 <div>
-                    @Html.LabelFor(d => d.SMVM)
+                    @Html.LabelFor(d => d.SMVM, new { @class = "d-block font-weight-bold" })
                     @Html.TextBoxFor(d => d.SMVM, "", new { @class = "form-control" })
                     @Html.ValidationMessageFor(d => d.SMVM, null, new { @class = "red" })
                 </div>

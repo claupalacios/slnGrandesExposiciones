@@ -21,10 +21,10 @@ namespace slnGrandesExposiciones.Models
         }
     
         public int ID { get; set; }
-        public Nullable<int> ID_TABLA { get; set; }
-        public Nullable<int> ID_FORMULA { get; set; }
+        public int ID_TABLA { get; set; }
+        public int ID_FORMULA { get; set; }
         public string CAMPO { get; set; }
-        public Nullable<int> ORDEN_HORIZONTAL { get; set; }
+        public int ORDEN_HORIZONTAL { get; set; }
         public string ALIAS { get; set; }
     
         public virtual Formulas Formulas { get; set; }

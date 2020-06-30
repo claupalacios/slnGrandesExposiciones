@@ -28,26 +28,19 @@
             </div>
             <div>
                 @Html.LabelFor(d => d.NOMBRE)
-                @Html.TextBoxFor(d => d.NOMBRE, "", new { @class = "form-control" })
+                @Html.TextBoxFor(d => d.NOMBRE, "", new { @class = "form-control", autocomplete = "off" })
                 @Html.ValidationMessageFor(d => d.NOMBRE, null, new { @class = "red" })
             </div>
-            @*<div>
+            <div>
                 @Html.LabelFor(d => d.CONTENIDO)
-                @Html.TextBoxFor(d => d.CONTENIDO, "", new { @class = "form-control", type = "file", name = "file" })
+                <input class="form-control" id="Foto" name="Foto" type="file" />
                 @Html.ValidationMessageFor(d => d.CONTENIDO, null, new { @class = "red" })
-            </div>*@
-                <input id="Foto" name="Foto" type="file" />
-
+            </div>
             <br />
-
             <div class="d-flex justify-content-between">
-                <a class="orange-button btn btn-outline-secondary" id="botonModificar" type="button" href="~/Parametros/Index">Volver</a>
+                <a class="orange-button btn btn-outline-secondary" id="botonModificar" type="button" href="~/Exposiciones/Index">Volver</a>
                 <input value="Guardar" class="orange-button btn btn-outline-secondary activo" type="submit" />
             </div>
-
-
-
         </div>
-
-        </div>
+    </div>
 }

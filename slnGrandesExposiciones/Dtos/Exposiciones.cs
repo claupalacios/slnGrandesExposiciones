@@ -11,7 +11,7 @@ namespace slnGrandesExposiciones.Dtos
         public DateTime FECHA_MOD { get; set; }
 
         public string Legajo { get; set; }
-        public bool Validado { get; set; }
+        public string Validado { get; set; }
     }
 
 }

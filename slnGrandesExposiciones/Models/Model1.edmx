@@ -10,20 +10,20 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ID_PERIODO" Type="int" />
-          <Property Name="TIPOTABLA" Type="int" />
-          <Property Name="NOMBRE" Type="varchar(max)" />
-          <Property Name="CONTENIDO" Type="varbinary(max)" />
+          <Property Name="ID_PERIODO" Type="int" Nullable="false" />
+          <Property Name="TIPOTABLA" Type="int" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar(max)" Nullable="false" />
+          <Property Name="CONTENIDO" Type="varbinary(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Campos">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ID_TABLA" Type="int" />
-          <Property Name="ID_FORMULA" Type="int" />
-          <Property Name="CAMPO" Type="varchar(max)" />
-          <Property Name="ORDEN_HORIZONTAL" Type="int" />
+          <Property Name="ID_TABLA" Type="int" Nullable="false" />
+          <Property Name="ID_FORMULA" Type="int" Nullable="false" />
+          <Property Name="CAMPO" Type="varchar(max)" Nullable="false" />
+          <Property Name="ORDEN_HORIZONTAL" Type="int" Nullable="false" />
           <Property Name="ALIAS" Type="varchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Exposiciones">
@@ -31,11 +31,11 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ID_PERIODO" Type="int" />
-          <Property Name="FECHA_ALTA" Type="datetime" />
-          <Property Name="FECHA_MOD" Type="datetime" />
-          <Property Name="LEGAJO" Type="varchar" MaxLength="10" />
-          <Property Name="VALIDADO" Type="bit" />
+          <Property Name="ID_PERIODO" Type="int" Nullable="false" />
+          <Property Name="FECHA_ALTA" Type="datetime" Nullable="false" />
+          <Property Name="FECHA_MOD" Type="datetime" Nullable="false" />
+          <Property Name="LEGAJO" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="VALIDADO" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Formulas">
           <Key>
@@ -50,25 +50,25 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ID_PERIODO" Type="int" />
-          <Property Name="TIER_1" Type="float" />
-          <Property Name="TIER_2" Type="float" />
-          <Property Name="TIER_3" Type="float" />
-          <Property Name="SMVM" Type="float" />
+          <Property Name="ID_PERIODO" Type="int" Nullable="false" />
+          <Property Name="TIER_1" Type="float" Nullable="false" />
+          <Property Name="TIER_2" Type="float" Nullable="false" />
+          <Property Name="TIER_3" Type="float" Nullable="false" />
+          <Property Name="SMVM" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="Periodos">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PERIODO" Type="varchar" MaxLength="6" />
+          <Property Name="PERIODO" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Tablas">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TABLA" Type="varchar" MaxLength="50" />
+          <Property Name="TABLA" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Valor_Campos">
           <Key>
@@ -80,7 +80,7 @@
           <Property Name="Valor" Type="varchar" MaxLength="99" Nullable="false" />
         </EntityType>
         <Association Name="FK__Archivos___ID_PE__11007AA7">
-          <End Role="Periodos" Type="Self.Periodos" Multiplicity="0..1">
+          <End Role="Periodos" Type="Self.Periodos" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="Archivos_Exposiciones" Type="Self.Archivos_Exposiciones" Multiplicity="*" />
@@ -94,7 +94,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Archivos___TIPOT__11F49EE0">
-          <End Role="Tablas" Type="Self.Tablas" Multiplicity="0..1" />
+          <End Role="Tablas" Type="Self.Tablas" Multiplicity="1" />
           <End Role="Archivos_Exposiciones" Type="Self.Archivos_Exposiciones" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tablas">
@@ -106,7 +106,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Campos__ID_FORMU__6CC31A31">
-          <End Role="Formulas" Type="Self.Formulas" Multiplicity="0..1" />
+          <End Role="Formulas" Type="Self.Formulas" Multiplicity="1" />
           <End Role="Campos" Type="Self.Campos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Formulas">
@@ -118,7 +118,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Campos__ID_TABLA__6BCEF5F8">
-          <End Role="Tablas" Type="Self.Tablas" Multiplicity="0..1">
+          <End Role="Tablas" Type="Self.Tablas" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="Campos" Type="Self.Campos" Multiplicity="*" />
@@ -132,7 +132,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Exposicio__ID_PE__737017C0">
-          <End Role="Periodos" Type="Self.Periodos" Multiplicity="0..1">
+          <End Role="Periodos" Type="Self.Periodos" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="Exposiciones" Type="Self.Exposiciones" Multiplicity="*" />
@@ -146,7 +146,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Parametro__ID_PE__5F691F13">
-          <End Role="Periodos" Type="Self.Periodos" Multiplicity="0..1">
+          <End Role="Periodos" Type="Self.Periodos" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="Parametros_Exposiciones" Type="Self.Parametros_Exposiciones" Multiplicity="*" />
@@ -234,13 +234,10 @@
     <edmx:ConceptualModels>
       <Schema Namespace="GrandesExposicionesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="GrandesExposicionesEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Campos" EntityType="GrandesExposicionesModel.Campos" />
-          <EntitySet Name="Exposiciones" EntityType="GrandesExposicionesModel.Exposiciones" />
           <EntitySet Name="Formulas" EntityType="GrandesExposicionesModel.Formulas" />
-          <EntitySet Name="Parametros_Exposiciones" EntityType="GrandesExposicionesModel.Parametros_Exposiciones" />
-          <EntitySet Name="Periodos" EntityType="GrandesExposicionesModel.Periodos" />
           <EntitySet Name="Tablas" EntityType="GrandesExposicionesModel.Tablas" />
           <EntitySet Name="Valor_Campos" EntityType="GrandesExposicionesModel.Valor_Campos" />
+          <EntitySet Name="Campos" EntityType="GrandesExposicionesModel.Campos" />
           <AssociationSet Name="FK__Campos__ID_FORMU__6CC31A31" Association="GrandesExposicionesModel.FK__Campos__ID_FORMU__6CC31A31">
             <End Role="Formulas" EntitySet="Formulas" />
             <End Role="Campos" EntitySet="Campos" />
@@ -253,92 +250,46 @@
             <End Role="Campos" EntitySet="Campos" />
             <End Role="Valor_Campos" EntitySet="Valor_Campos" />
           </AssociationSet>
+          <EntitySet Name="Archivos_Exposiciones" EntityType="GrandesExposicionesModel.Archivos_Exposiciones" />
+          <AssociationSet Name="FK__Archivos___TIPOT__11F49EE0" Association="GrandesExposicionesModel.FK__Archivos___TIPOT__11F49EE0">
+            <End Role="Tablas" EntitySet="Tablas" />
+            <End Role="Archivos_Exposiciones" EntitySet="Archivos_Exposiciones" />
+          </AssociationSet>
+          <EntitySet Name="Exposiciones" EntityType="GrandesExposicionesModel.Exposiciones" />
+          <EntitySet Name="Periodos" EntityType="GrandesExposicionesModel.Periodos" />
+          <AssociationSet Name="FK__Archivos___ID_PE__11007AA7" Association="GrandesExposicionesModel.FK__Archivos___ID_PE__11007AA7">
+            <End Role="Periodos" EntitySet="Periodos" />
+            <End Role="Archivos_Exposiciones" EntitySet="Archivos_Exposiciones" />
+          </AssociationSet>
           <AssociationSet Name="FK__Exposicio__ID_PE__737017C0" Association="GrandesExposicionesModel.FK__Exposicio__ID_PE__737017C0">
             <End Role="Periodos" EntitySet="Periodos" />
             <End Role="Exposiciones" EntitySet="Exposiciones" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Parametro__ID_PE__5F691F13" Association="GrandesExposicionesModel.FK__Parametro__ID_PE__5F691F13">
-            <End Role="Periodos" EntitySet="Periodos" />
-            <End Role="Parametros_Exposiciones" EntitySet="Parametros_Exposiciones" />
           </AssociationSet>
           <AssociationSet Name="FK__Valor_Cam__ID_PE__02B25B50" Association="GrandesExposicionesModel.FK__Valor_Cam__ID_PE__02B25B50">
             <End Role="Periodos" EntitySet="Periodos" />
             <End Role="Valor_Campos" EntitySet="Valor_Campos" />
           </AssociationSet>
-          <EntitySet Name="Archivos_Exposiciones" EntityType="GrandesExposicionesModel.Archivos_Exposiciones" />
-          <AssociationSet Name="FK__Archivos___ID_PE__11007AA7" Association="GrandesExposicionesModel.FK__Archivos___ID_PE__11007AA7">
+          <EntitySet Name="Parametros_Exposiciones" EntityType="GrandesExposicionesModel.Parametros_Exposiciones" />
+          <AssociationSet Name="FK__Parametro__ID_PE__5F691F13" Association="GrandesExposicionesModel.FK__Parametro__ID_PE__5F691F13">
             <End Role="Periodos" EntitySet="Periodos" />
-            <End Role="Archivos_Exposiciones" EntitySet="Archivos_Exposiciones" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Archivos___TIPOT__11F49EE0" Association="GrandesExposicionesModel.FK__Archivos___TIPOT__11F49EE0">
-            <End Role="Tablas" EntitySet="Tablas" />
-            <End Role="Archivos_Exposiciones" EntitySet="Archivos_Exposiciones" />
+            <End Role="Parametros_Exposiciones" EntitySet="Parametros_Exposiciones" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Campos">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ID_TABLA" Type="Int32" />
-          <Property Name="ID_FORMULA" Type="Int32" />
-          <Property Name="CAMPO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="ORDEN_HORIZONTAL" Type="Int32" />
-          <Property Name="ALIAS" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Formulas" Relationship="GrandesExposicionesModel.FK__Campos__ID_FORMU__6CC31A31" FromRole="Campos" ToRole="Formulas" />
-          <NavigationProperty Name="Tablas" Relationship="GrandesExposicionesModel.FK__Campos__ID_TABLA__6BCEF5F8" FromRole="Campos" ToRole="Tablas" />
-          <NavigationProperty Name="Valor_Campos" Relationship="GrandesExposicionesModel.FK__Valor_Cam__ID_CA__01BE3717" FromRole="Campos" ToRole="Valor_Campos" />
-        </EntityType>
-        <EntityType Name="Exposiciones">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ID_PERIODO" Type="Int32" />
-          <Property Name="FECHA_ALTA" Type="DateTime" Precision="3" />
-          <Property Name="FECHA_MOD" Type="DateTime" Precision="3" />
-          <Property Name="LEGAJO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="VALIDADO" Type="Boolean" />
-          <NavigationProperty Name="Periodos" Relationship="GrandesExposicionesModel.FK__Exposicio__ID_PE__737017C0" FromRole="Exposiciones" ToRole="Periodos" />
-        </EntityType>
         <EntityType Name="Formulas">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NOMBRE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="FORMULA" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="NOMBRE" MaxLength="Max" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="FORMULA" MaxLength="Max" FixedLength="false" Unicode="false" Type="String" />
           <NavigationProperty Name="Campos" Relationship="GrandesExposicionesModel.FK__Campos__ID_FORMU__6CC31A31" FromRole="Formulas" ToRole="Campos" />
-        </EntityType>
-        <EntityType Name="Parametros_Exposiciones">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ID_PERIODO" Type="Int32" />
-          <Property Name="TIER_1" Type="Double" />
-          <Property Name="TIER_2" Type="Double" />
-          <Property Name="TIER_3" Type="Double" />
-          <Property Name="SMVM" Type="Double" />
-          <NavigationProperty Name="Periodos" Relationship="GrandesExposicionesModel.FK__Parametro__ID_PE__5F691F13" FromRole="Parametros_Exposiciones" ToRole="Periodos" />
-        </EntityType>
-        <EntityType Name="Periodos">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PERIODO" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Exposiciones" Relationship="GrandesExposicionesModel.FK__Exposicio__ID_PE__737017C0" FromRole="Periodos" ToRole="Exposiciones" />
-          <NavigationProperty Name="Parametros_Exposiciones" Relationship="GrandesExposicionesModel.FK__Parametro__ID_PE__5F691F13" FromRole="Periodos" ToRole="Parametros_Exposiciones" />
-          <NavigationProperty Name="Valor_Campos" Relationship="GrandesExposicionesModel.FK__Valor_Cam__ID_PE__02B25B50" FromRole="Periodos" ToRole="Valor_Campos" />
-          <NavigationProperty Name="Archivos_Exposiciones" Relationship="GrandesExposicionesModel.FK__Archivos___ID_PE__11007AA7" FromRole="Periodos" ToRole="Archivos_Exposiciones" />
         </EntityType>
         <EntityType Name="Tablas">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TABLA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="TABLA" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
           <NavigationProperty Name="Campos" Relationship="GrandesExposicionesModel.FK__Campos__ID_TABLA__6BCEF5F8" FromRole="Tablas" ToRole="Campos" />
           <NavigationProperty Name="Archivos_Exposiciones" Relationship="GrandesExposicionesModel.FK__Archivos___TIPOT__11F49EE0" FromRole="Tablas" ToRole="Archivos_Exposiciones" />
         </EntityType>
@@ -346,15 +297,29 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ID_CAMPOS" Type="Int32" Nullable="false" />
-          <Property Name="ID_PERIODO" Type="Int32" Nullable="false" />
-          <Property Name="Valor" Type="String" Nullable="false" MaxLength="99" FixedLength="false" Unicode="false" />
+          <Property Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="ID_CAMPOS" Nullable="false" Type="Int32" />
+          <Property Name="ID_PERIODO" Nullable="false" Type="Int32" />
+          <Property Name="Valor" Nullable="false" MaxLength="99" FixedLength="false" Unicode="false" Type="String" />
           <NavigationProperty Name="Campos" Relationship="GrandesExposicionesModel.FK__Valor_Cam__ID_CA__01BE3717" FromRole="Valor_Campos" ToRole="Campos" />
           <NavigationProperty Name="Periodos" Relationship="GrandesExposicionesModel.FK__Valor_Cam__ID_PE__02B25B50" FromRole="Valor_Campos" ToRole="Periodos" />
         </EntityType>
+        <EntityType Name="Campos">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_TABLA" Type="Int32" Nullable="false" />
+          <Property Name="ID_FORMULA" Type="Int32" Nullable="false" />
+          <Property Name="CAMPO" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ORDEN_HORIZONTAL" Type="Int32" Nullable="false" />
+          <Property Name="ALIAS" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Formulas" Relationship="GrandesExposicionesModel.FK__Campos__ID_FORMU__6CC31A31" FromRole="Campos" ToRole="Formulas" />
+          <NavigationProperty Name="Tablas" Relationship="GrandesExposicionesModel.FK__Campos__ID_TABLA__6BCEF5F8" FromRole="Campos" ToRole="Tablas" />
+          <NavigationProperty Name="Valor_Campos" Relationship="GrandesExposicionesModel.FK__Valor_Cam__ID_CA__01BE3717" FromRole="Campos" ToRole="Valor_Campos" />
+        </EntityType>
         <Association Name="FK__Campos__ID_FORMU__6CC31A31">
-          <End Type="GrandesExposicionesModel.Formulas" Role="Formulas" Multiplicity="0..1" />
+          <End Type="GrandesExposicionesModel.Formulas" Role="Formulas" Multiplicity="1" />
           <End Type="GrandesExposicionesModel.Campos" Role="Campos" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Formulas">
@@ -366,7 +331,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Campos__ID_TABLA__6BCEF5F8">
-          <End Type="GrandesExposicionesModel.Tablas" Role="Tablas" Multiplicity="0..1">
+          <End Type="GrandesExposicionesModel.Tablas" Role="Tablas" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Type="GrandesExposicionesModel.Campos" Role="Campos" Multiplicity="*" />
@@ -393,8 +358,69 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Archivos_Exposiciones">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PERIODO" Type="Int32" Nullable="false" />
+          <Property Name="TIPOTABLA" Type="Int32" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CONTENIDO" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Tablas" Relationship="GrandesExposicionesModel.FK__Archivos___TIPOT__11F49EE0" FromRole="Archivos_Exposiciones" ToRole="Tablas" />
+          <NavigationProperty Name="Periodos" Relationship="GrandesExposicionesModel.FK__Archivos___ID_PE__11007AA7" FromRole="Archivos_Exposiciones" ToRole="Periodos" />
+        </EntityType>
+        <Association Name="FK__Archivos___TIPOT__11F49EE0">
+          <End Type="GrandesExposicionesModel.Tablas" Role="Tablas" Multiplicity="1" />
+          <End Type="GrandesExposicionesModel.Archivos_Exposiciones" Role="Archivos_Exposiciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tablas">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Archivos_Exposiciones">
+              <PropertyRef Name="TIPOTABLA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Exposiciones">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PERIODO" Type="Int32" Nullable="false" />
+          <Property Name="FECHA_ALTA" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FECHA_MOD" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LEGAJO" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="VALIDADO" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Periodos" Relationship="GrandesExposicionesModel.FK__Exposicio__ID_PE__737017C0" FromRole="Exposiciones" ToRole="Periodos" />
+        </EntityType>
+        <EntityType Name="Periodos">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PERIODO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Archivos_Exposiciones" Relationship="GrandesExposicionesModel.FK__Archivos___ID_PE__11007AA7" FromRole="Periodos" ToRole="Archivos_Exposiciones" />
+          <NavigationProperty Name="Exposiciones" Relationship="GrandesExposicionesModel.FK__Exposicio__ID_PE__737017C0" FromRole="Periodos" ToRole="Exposiciones" />
+          <NavigationProperty Name="Valor_Campos" Relationship="GrandesExposicionesModel.FK__Valor_Cam__ID_PE__02B25B50" FromRole="Periodos" ToRole="Valor_Campos" />
+          <NavigationProperty Name="Parametros_Exposiciones" Relationship="GrandesExposicionesModel.FK__Parametro__ID_PE__5F691F13" FromRole="Periodos" ToRole="Parametros_Exposiciones" />
+        </EntityType>
+        <Association Name="FK__Archivos___ID_PE__11007AA7">
+          <End Type="GrandesExposicionesModel.Periodos" Role="Periodos" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="GrandesExposicionesModel.Archivos_Exposiciones" Role="Archivos_Exposiciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Periodos">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Archivos_Exposiciones">
+              <PropertyRef Name="ID_PERIODO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Exposicio__ID_PE__737017C0">
-          <End Type="GrandesExposicionesModel.Periodos" Role="Periodos" Multiplicity="0..1">
+          <End Type="GrandesExposicionesModel.Periodos" Role="Periodos" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
           <End Type="GrandesExposicionesModel.Exposiciones" Role="Exposiciones" Multiplicity="*" />
@@ -403,20 +429,6 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Exposiciones">
-              <PropertyRef Name="ID_PERIODO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Parametro__ID_PE__5F691F13">
-          <End Type="GrandesExposicionesModel.Periodos" Role="Periodos" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="GrandesExposicionesModel.Parametros_Exposiciones" Role="Parametros_Exposiciones" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Periodos">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Parametros_Exposiciones">
               <PropertyRef Name="ID_PERIODO" />
             </Dependent>
           </ReferentialConstraint>
@@ -435,41 +447,29 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Archivos_Exposiciones">
+        <EntityType Name="Parametros_Exposiciones">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ID_PERIODO" Type="Int32" />
-          <Property Name="TIPOTABLA" Type="Int32" />
-          <Property Name="NOMBRE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="CONTENIDO" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="Periodos" Relationship="GrandesExposicionesModel.FK__Archivos___ID_PE__11007AA7" FromRole="Archivos_Exposiciones" ToRole="Periodos" />
-          <NavigationProperty Name="Tablas" Relationship="GrandesExposicionesModel.FK__Archivos___TIPOT__11F49EE0" FromRole="Archivos_Exposiciones" ToRole="Tablas" />
+          <Property Name="ID_PERIODO" Type="Int32" Nullable="false" />
+          <Property Name="TIER_1" Type="Double" Nullable="false" />
+          <Property Name="TIER_2" Type="Double" Nullable="false" />
+          <Property Name="TIER_3" Type="Double" Nullable="false" />
+          <Property Name="SMVM" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Periodos" Relationship="GrandesExposicionesModel.FK__Parametro__ID_PE__5F691F13" FromRole="Parametros_Exposiciones" ToRole="Periodos" />
         </EntityType>
-        <Association Name="FK__Archivos___ID_PE__11007AA7">
-          <End Type="GrandesExposicionesModel.Periodos" Role="Periodos" Multiplicity="0..1">
+        <Association Name="FK__Parametro__ID_PE__5F691F13">
+          <End Type="GrandesExposicionesModel.Periodos" Role="Periodos" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="GrandesExposicionesModel.Archivos_Exposiciones" Role="Archivos_Exposiciones" Multiplicity="*" />
+          <End Type="GrandesExposicionesModel.Parametros_Exposiciones" Role="Parametros_Exposiciones" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Periodos">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Archivos_Exposiciones">
+            <Dependent Role="Parametros_Exposiciones">
               <PropertyRef Name="ID_PERIODO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Archivos___TIPOT__11F49EE0">
-          <End Type="GrandesExposicionesModel.Tablas" Role="Tablas" Multiplicity="0..1" />
-          <End Type="GrandesExposicionesModel.Archivos_Exposiciones" Role="Archivos_Exposiciones" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tablas">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Archivos_Exposiciones">
-              <PropertyRef Name="TIPOTABLA" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -479,55 +479,11 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="GrandesExposicionesModelStoreContainer" CdmEntityContainer="GrandesExposicionesEntities">
-          <EntitySetMapping Name="Campos">
-            <EntityTypeMapping TypeName="GrandesExposicionesModel.Campos">
-              <MappingFragment StoreEntitySet="Campos">
-                <ScalarProperty Name="ALIAS" ColumnName="ALIAS" />
-                <ScalarProperty Name="ORDEN_HORIZONTAL" ColumnName="ORDEN_HORIZONTAL" />
-                <ScalarProperty Name="CAMPO" ColumnName="CAMPO" />
-                <ScalarProperty Name="ID_FORMULA" ColumnName="ID_FORMULA" />
-                <ScalarProperty Name="ID_TABLA" ColumnName="ID_TABLA" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Exposiciones">
-            <EntityTypeMapping TypeName="GrandesExposicionesModel.Exposiciones">
-              <MappingFragment StoreEntitySet="Exposiciones">
-                <ScalarProperty Name="VALIDADO" ColumnName="VALIDADO" />
-                <ScalarProperty Name="LEGAJO" ColumnName="LEGAJO" />
-                <ScalarProperty Name="FECHA_MOD" ColumnName="FECHA_MOD" />
-                <ScalarProperty Name="FECHA_ALTA" ColumnName="FECHA_ALTA" />
-                <ScalarProperty Name="ID_PERIODO" ColumnName="ID_PERIODO" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Formulas">
             <EntityTypeMapping TypeName="GrandesExposicionesModel.Formulas">
               <MappingFragment StoreEntitySet="Formulas">
                 <ScalarProperty Name="FORMULA" ColumnName="FORMULA" />
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Parametros_Exposiciones">
-            <EntityTypeMapping TypeName="GrandesExposicionesModel.Parametros_Exposiciones">
-              <MappingFragment StoreEntitySet="Parametros_Exposiciones">
-                <ScalarProperty Name="SMVM" ColumnName="SMVM" />
-                <ScalarProperty Name="TIER_3" ColumnName="TIER_3" />
-                <ScalarProperty Name="TIER_2" ColumnName="TIER_2" />
-                <ScalarProperty Name="TIER_1" ColumnName="TIER_1" />
-                <ScalarProperty Name="ID_PERIODO" ColumnName="ID_PERIODO" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Periodos">
-            <EntityTypeMapping TypeName="GrandesExposicionesModel.Periodos">
-              <MappingFragment StoreEntitySet="Periodos">
-                <ScalarProperty Name="PERIODO" ColumnName="PERIODO" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -550,12 +506,56 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Campos">
+            <EntityTypeMapping TypeName="GrandesExposicionesModel.Campos">
+              <MappingFragment StoreEntitySet="Campos">
+                <ScalarProperty Name="ALIAS" ColumnName="ALIAS" />
+                <ScalarProperty Name="ORDEN_HORIZONTAL" ColumnName="ORDEN_HORIZONTAL" />
+                <ScalarProperty Name="CAMPO" ColumnName="CAMPO" />
+                <ScalarProperty Name="ID_FORMULA" ColumnName="ID_FORMULA" />
+                <ScalarProperty Name="ID_TABLA" ColumnName="ID_TABLA" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Archivos_Exposiciones">
             <EntityTypeMapping TypeName="GrandesExposicionesModel.Archivos_Exposiciones">
               <MappingFragment StoreEntitySet="Archivos_Exposiciones">
                 <ScalarProperty Name="CONTENIDO" ColumnName="CONTENIDO" />
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
                 <ScalarProperty Name="TIPOTABLA" ColumnName="TIPOTABLA" />
+                <ScalarProperty Name="ID_PERIODO" ColumnName="ID_PERIODO" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Exposiciones">
+            <EntityTypeMapping TypeName="GrandesExposicionesModel.Exposiciones">
+              <MappingFragment StoreEntitySet="Exposiciones">
+                <ScalarProperty Name="VALIDADO" ColumnName="VALIDADO" />
+                <ScalarProperty Name="LEGAJO" ColumnName="LEGAJO" />
+                <ScalarProperty Name="FECHA_MOD" ColumnName="FECHA_MOD" />
+                <ScalarProperty Name="FECHA_ALTA" ColumnName="FECHA_ALTA" />
+                <ScalarProperty Name="ID_PERIODO" ColumnName="ID_PERIODO" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Periodos">
+            <EntityTypeMapping TypeName="GrandesExposicionesModel.Periodos">
+              <MappingFragment StoreEntitySet="Periodos">
+                <ScalarProperty Name="PERIODO" ColumnName="PERIODO" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parametros_Exposiciones">
+            <EntityTypeMapping TypeName="GrandesExposicionesModel.Parametros_Exposiciones">
+              <MappingFragment StoreEntitySet="Parametros_Exposiciones">
+                <ScalarProperty Name="SMVM" ColumnName="SMVM" />
+                <ScalarProperty Name="TIER_3" ColumnName="TIER_3" />
+                <ScalarProperty Name="TIER_2" ColumnName="TIER_2" />
+                <ScalarProperty Name="TIER_1" ColumnName="TIER_1" />
                 <ScalarProperty Name="ID_PERIODO" ColumnName="ID_PERIODO" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>

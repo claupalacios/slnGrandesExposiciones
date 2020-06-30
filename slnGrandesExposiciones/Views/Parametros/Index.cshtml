@@ -1,4 +1,4 @@
-﻿@model IEnumerable<slnGrandesExposiciones.Models.Parametros_Exposiciones>
+﻿@model IList<slnGrandesExposiciones.Dtos.ParametrosDto>
 
 @{
     ViewBag.Title = "Modificación de Parámetros";
@@ -18,23 +18,16 @@
 </head>
 <section class="content-principal">
     <h2>Parámetros</h2>
-
-    @*<div class="alert alert-success alert-dismissible fade" role="alert" id="buttonSuccess">
-            <p>Parámetro ingresado con éxito</p>
-            <button type="button" class="close"  aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>*@
     <div id="myAlertSuccess" class="alert alert-success collapse">
         <a id="linkClose" data-dismiss="alert" href="#" class="close">&times;</a>
-         Parámetro eliminado con éxito!
+        Parámetro eliminado con éxito!
     </div>
     <div id="myAlertDanger" class="alert alert-danger collapse">
         <a id="linkClose" href="#" data-dismiss="alert" class="close">&times;</a>
         Reinicie la aplicación y vuelva a intentar.
     </div>
 
-   
+
     <br />
     <div style="text-align:right">
         <a class="orange-button btn btn-outline-secondary" id="botonNuevo" type="button" href="~/Parametros/Nuevo">Ingresar Parámetro &nbsp;<i class="fa fa-plus"></i></a>
@@ -44,23 +37,24 @@
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Periodos)
+                @*@Html.DisplayNameFor(model => model.ID_PERIODO)*@
+                PERIODOS
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TIER_1)
-
+                @*@Html.DisplayNameFor(model => model.TIER_1)*@
+                TIER 1
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TIER_2)
-
+                @*@Html.DisplayNameFor(model => model.TIER_2)*@
+                TIER 2
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TIER_3)
-
+                @*@Html.DisplayNameFor(model => model.TIER_3)*@
+                TIER 3
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SMVM)
-
+                @*@Html.DisplayNameFor(model => model.SMVM)*@
+                SMVM
             </th>
             <th>
                 <span>Modificar</span>
@@ -89,10 +83,10 @@
                     @Html.DisplayFor(modelItem => item.SMVM)
                 </td>
                 <td>
-                    <a class="orange-button btn btn-outline-secondary" type="button" href="~/Parametros/Editar/@item.ID"><i class="fa fa-cog"></i></a>
+                    <a class="orange-button btn btn-outline-secondary" type="button" href="~/Parametros/Editar/@item.Id"><i class="fa fa-cog"></i></a>
                 </td>
                 <td>
-                    <a class="orange-button btn btn-outline-secondary delete" data-id="@item.ID" type="button" data-toggle="modal" data-target="#modalEliminar"><i class="fa fa-trash"></i></a>
+                    <a class="orange-button btn btn-outline-secondary delete" data-id="@item.Id"  data-toggle="modal" data-target="#modalEliminar"><i class="fa fa-trash"></i></a>
                 </td>
 
             </tr>
@@ -115,10 +109,11 @@
             </div>
             <div class="modal-body">
                 <p>¿Está seguro que desea eliminar el parámetro?</p>
+                <input type="text" name="parametroAEliminar" id="parametroAEliminar" value="" style="display:none;" />
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="button" id="aceptarBoton" class="btn btn-outline-secondary confirm-button" data-dismiss="modal" data-toggle="modal" data-target="#modalAtencion">Aceptar</button>
+                <button type="button" id="aceptarEliminarParametroBoton" class="btn btn-outline-secondary confirm-button" data-dismiss="modal" data-toggle="modal" data-target="#modalAtencion">Aceptar</button>
             </div>
         </div>
     </div>

@@ -35,22 +35,24 @@
 
     </div>
     <br /><br />
+    @*<a href="@(Url.Action("ExportIndex") + "?" + ViewContext.HttpContext.Request.QueryString)">Export</a>*@
+    <a href="~/Archivos/TotalGrupo?"+ ViewContext.HttpContext.Request.QueryString)">Export</a>
 
     @Html.AjaxGrid(Url.Action("IndexGrid"))
     <div class="content-table">
         @(Html
-                                            .Grid(Model)
-                                            .Build(columns =>
-                                            {                                       
-                                                foreach (var item in Model)
-                                                {
-                                                    columns.Add(modelItem => item.Valor).Titled(item.Titulo);
-                                                }
-                                            })
-                                            .Empty("No se encontraron datos")
-                                            .Id("my-ajax-grid")
-                                            .Filterable()
-                                            .Sortable()
+                                                            .Grid(Model)
+                                                            .Build(columns =>
+                                                            {
+                                                                foreach (var item in Model)
+                                                                {
+                                                                    columns.Add(modelItem => item.Valor).Titled(item.Titulo);
+                                                                }
+                                                            })
+                                                            .Empty("No se encontraron datos")
+                                                            .Id("my-ajax-grid")
+                                                            .Filterable()
+                                                            .Sortable()
         )
     </div>
 

@@ -11,16 +11,18 @@ namespace slnGrandesExposiciones.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class Parametros_Exposiciones
     {
         public int ID { get; set; }
-        public Nullable<int> ID_PERIODO { get; set; }
-        public Nullable<double> TIER_1 { get; set; }
-        public Nullable<double> TIER_2 { get; set; }
-        public Nullable<double> TIER_3 { get; set; }
-        public Nullable<double> SMVM { get; set; }
-    
+        public int ID_PERIODO { get; set; }
+        public double TIER_1 { get; set; }
+        public double TIER_2 { get; set; }
+        public double TIER_3 { get; set; }
+        public double SMVM { get; set; }
+
+        [DisplayName("Periodo")]
         public virtual Periodos Periodos { get; set; }
     }
 }

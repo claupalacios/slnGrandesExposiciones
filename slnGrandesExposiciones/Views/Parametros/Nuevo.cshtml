@@ -23,7 +23,7 @@
             <br />
             <div>
                 @Html.LabelFor(d => d.ID_PERIODO, "PERIODO")
-                @Html.TextBoxFor(d => d.ID_PERIODO, "", new { @class = "form-control date-picker", @id = "startDate", @name = "startDate" })
+                @Html.TextBoxFor(d => d.ID_PERIODO, "", new { @class = "form-control date-picker", @id = "startDate", @name = "startDate", autocomplete = "off" })
                 @Html.ValidationMessageFor(d => d.ID_PERIODO, null, new { @class = "red" })
             </div>
             <div>
